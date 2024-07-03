@@ -1,0 +1,21 @@
+%h2 Log in
+
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .field
+    .control
+      = f.input :email, autofocus: true, autocomplete: "email", input_html: { class: "input", placeholder: "Email" }
+
+  .field
+    .control
+      = f.input :password, autocomplete: "email", input_html: { class: "input", placeholder: "Mot de passe" }
+
+  - if devise_mapping.rememberable?
+    .field
+      = f.check_box :remember_me
+      = f.label :remember_me
+
+  .field
+    .control
+      = f.submit 'Se connecter', class: 'button is-primary'
+
+= render "devise/shared/links"

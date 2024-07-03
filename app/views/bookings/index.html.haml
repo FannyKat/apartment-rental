@@ -1,0 +1,35 @@
+%h1 Vos demandes de réservations
+
+- if @bookings.any?
+  - @bookings.each do |booking|
+    .card
+      %header.card-header
+        %p.card-header-title Réservations
+        %button.card-header-icon{ "aria-label": "more options" }
+          %span.icon
+            %i.fas.fa-angle-down{ "aria-hidden": "true" }
+
+      .card-content
+        .content
+          %div Locataire : #{User.find_by(id: booking.user_id).email}
+          %div Appartement : #{booking.apartment.id}
+          %div Localisation : #{booking.apartment.location}
+          %div Prix : #{booking.apartment.rent_amount}
+          %div Nombre de Chambres : #{booking.apartment.number_of_bedrooms}
+          %div Status : #{booking.status}
+
+      .card-footer
+        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
+          = f.hidden_field :status, value: 'pending'
+          = f.submit 'Mettre en attente', class: 'button card-footer-item'
+
+        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
+          = f.hidden_field :status, value: 'accepted'
+          = f.submit 'Accepter', class: 'button card-footer-item'
+
+        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
+          = f.hidden_field :status, value: 'rejected'
+          = f.submit 'Rejeter', class: 'button card-footer-item'
+
+- else
+  %p Vous n'avez pas de réservations pour le moment.

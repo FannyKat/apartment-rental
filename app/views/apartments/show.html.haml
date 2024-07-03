@@ -1,0 +1,28 @@
+- if @apartments.any?
+  - @apartments.each do |apartment|
+    .card
+      %header.card-header
+        %p.card-header-title Appartement
+        %button.card-header-icon{"aria-label": "more options"}
+          %span.icon
+            %i.fas.fa-angle-down{"aria-hidden": "true"}
+      .card-content
+        .content
+          %div
+            %strong Prix : 
+            =apartment.rent_amount
+          %div
+            %strong #{apartment.number_of_bedrooms} chambres
+          %div
+            %strong Localisation : 
+            = apartment.location
+          %div
+            %strong Commodités :
+            = apartment.amenities
+      .card-footer
+        - if current_user.owner?
+          = render partial: 'layouts/card_actions', locals: { apartment: apartment }
+        - else
+          = link_to "Louer", new_booking_path(apartment_id: apartment.id), remote: true, class: "card-footer-item"
+- else
+  %p Vous n'avez pas d'appartements en location.

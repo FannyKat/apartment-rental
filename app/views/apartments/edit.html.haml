@@ -1,0 +1,17 @@
+%h1 Modifier l'appartement
+
+= simple_form_for @apartment do |f|
+  .field
+    = f.input :rent_amount, input_html: { class: 'input', placeholder: 'Prix du loyer' }
+  
+  .field
+    = f.input :location, input_html: { class: 'input', placeholder: 'Localisation' }
+  
+  .field
+    = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: 'Nombre de chambres' }
+  
+  .field
+    = f.input :amenities, input_html: { class: 'input', placeholder: 'Équipements' }
+  
+  .actions
+    = f.submit 'Enregistrer', class: 'button is-primary'

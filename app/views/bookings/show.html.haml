@@ -1,0 +1,50 @@
+%h1 Vos réservations
+
+- if @bookings.any?
+  - @bookings.each do |booking|
+    .card
+      .card-header
+        %p.card-header-title Réservations
+        %button.card-header-icon{ aria: { label: "more options" } }
+          %span.icon
+            %i.fas.fa-angle-down{ aria: { hidden: "true" } }
+
+      .card-content
+        .content
+          %div
+            - if booking.apartment.image.attached?
+              = image_tag booking.apartment.image.variant(resize_to_fit: [500,500])
+          %div 
+            %strong Locataire : 
+            = User.find_by(id: booking.user_id).email
+          %div 
+            %strong Appartement : 
+            = booking.apartment.id
+          %div 
+            %strong Localisation : 
+            = booking.apartment.location
+          %div 
+            %strong Prix : 
+            = booking.apartment.rent_amount
+          %div 
+            %strong Nombre de Chambres : 
+            = booking.apartment.number_of_bedrooms
+          %div 
+            %strong Status : 
+            =booking.status
+
+      .card-footer
+        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
+          = f.hidden_field :status, value: 'pending'
+          = f.submit 'Mettre en attente', class: 'button is-info card-footer-item'
+
+        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
+          = f.hidden_field :status, value: 'accepted'
+          = f.submit 'Accepter', class: 'button is-success card-footer-item'
+
+        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
+          = f.hidden_field :status, value: 'rejected'
+          = f.submit 'Rejeter', class: 'button is-danger card-footer-item'
+      
+- else
+  %p Vous n'avez pas de réservations pour le moment.

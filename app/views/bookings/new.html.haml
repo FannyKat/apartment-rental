@@ -1,0 +1,32 @@
+%div.card
+  %header.card-header
+    %p.card-header-title Réserver un appartement
+    %button.card-header-icon{"aria-label": "more options"}
+      %span.icon
+        %i.fas.fa-angle-down{"aria-hidden": "true"}
+  .card-content
+    .content
+      %div Propriétaire : #{@apartment.user.email}
+      %br
+      %div Appartement : #{@apartment.id}
+      %br
+      %div Localisation : #{@apartment.location}
+      %br
+      %div Prix : #{@apartment.rent_amount}
+      %br
+      %div Nombre de Chambres : #{@apartment.number_of_bedrooms}
+      %br
+  .card-footer
+    = form_with(model: @booking, url: bookings_path, local: true) do |f|
+      = f.hidden_field :apartment_id, value: @apartment.id
+      .field
+        = f.label :start_date, 'Date de début'
+        = f.date_field :start_date, class: 'input'
+      .field
+        = f.label :end_date, 'Date de fin'
+        = f.date_field :end_date, class: 'input'
+      .field
+        = f.label :message, 'Message'
+        = f.text_area :message, class: 'textarea', placeholder: 'Votre message...'
+      .field
+        = f.submit 'Réserver', class: 'button is-primary'

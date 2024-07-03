@@ -1,0 +1,26 @@
+%h1 Votre appartement :
+
+= simple_form_for(@apartment) do |f|
+  .field
+    .control
+      = f.input :rent_amount, input_html: { class: 'input', placeholder: 'Prix du loyer' }
+
+  .field
+    .control
+      = f.input :location, input_html: { class: 'input', placeholder: 'Localisation' }
+
+  .field
+    .control
+      = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: 'Nombre de chambres' }
+
+  .field
+    .control
+      = f.input :amenities, input_html: { class: 'input', placeholder: 'Équipements' }
+
+  .field
+    .control
+      = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
+
+  .field
+    .control
+      = f.submit 'Save', class: 'button is-primary'

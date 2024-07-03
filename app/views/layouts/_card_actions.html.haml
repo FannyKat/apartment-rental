@@ -1,0 +1,18 @@
+.card-footer
+  - if policy(apartment).reserve?
+    = link_to 'Réserver', reserve_apartment_path(apartment), class: "button"
+
+  - if policy(apartment).update?
+    = link_to 'Editer', edit_apartment_path(apartment.id), class: "button is-primary"
+  
+  - if policy(apartment).destroy?
+    = button_to 'Supprimer', apartment_path(apartment.id), method: :delete, class: "button"
+  
+  - if policy(apartment).reserve?
+    = link_to 'Réserver', reserve_apartment_path(apartment), class: "button"
+
+  -# - if policy(apartment).accept_reservation?
+  -#   = link_to 'Accepter réservation', accept_reservation_apartment_path(@apartment), class: "btn btn-info"
+
+  -# - if policy(apartment).reject_reservation?
+  -#   = link_to 'Rejeter réservation', reject_reservation_apartment_path(@apartment), class: "btn btn-danger"

@@ -1,0 +1,28 @@
+%nav.navbar{role: "navigation", aria: {label: "main navigation"}}
+  .navbar-brand
+    %a.navbar-burger{role: "button", aria: {label: "menu", expanded: "false"}, data: {target: "navbarBasicExample"}}
+      %span{aria: {hidden: "true"}}
+      %span{aria: {hidden: "true"}}
+      %span{aria: {hidden: "true"}}
+      %span{aria: {hidden: "true"}}
+  #navbarBasicExample.navbar-menu
+    .navbar-start
+      %a.navbar-item{href: root_path, class: "button"}
+        Apartment Rental
+
+    - if current_user
+      .navbar-end
+        .navbar-item.has-dropdown.is-hoverable.button
+          %a.navbar-link
+            = current_user.email
+          .navbar-dropdown.is-right
+            = link_to 'Appartements', apartments_path, class: 'navbar-item'
+            - if policy(:user).admin_dashboard?
+              = link_to 'Administration', rails_admin_path, class: 'navbar-item'
+            - elsif policy(:user).owner? || policy(:user).tenant?
+              = link_to 'Réservations', bookings_path, class: 'navbar-item'
+
+            %hr.navbar-divider
+            = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'navbar-item'
+    - else
+      = link_to 'Login', new_user_session_path, class: 'navbar-item'

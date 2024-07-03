@@ -1,0 +1,40 @@
+%h2= "Edit #{resource_name.to_s.humanize}"
+
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = render "devise/shared/error_messages", resource: resource
+
+  .field
+    .control
+      = f.input :email, autofocus: true, autocomplete: "email", input_html: { class: "input", placeholder: "Email" }
+
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    %div
+      Currently waiting confirmation for: #{resource.unconfirmed_email}
+
+  .field
+    .control
+      - if @minimum_password_length
+        %em= t('devise.shared.minimum_password_length', count: @minimum_password_length)
+        = f.input :password, autofocus: true, autocomplete: "new-password", placeholder: "Nouveau mot de passe"
+        %i (leave blank if you don't want to change it)
+  .field
+    .control
+      = f.input :password_confirmation, autocomplete: "new-password", placeholder: "Nouveau mot de passe" 
+
+  .field
+    = f.input :current_password, autocomplete: "current-password", placeholder: "Mot de passe actuel"
+    %i (we need your current password to confirm your changes)
+    %br
+
+  .field.dropdown
+    = f.input :role, collection: User.roles.except(:admin).keys.map { |role| role.humanize }, include_blank: false, label: false
+    %br
+
+  .actions
+    = f.submit "Update", class: "button is-primary"
+
+%br
+%h3 Cancel my account
+= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "button is-danger"
+
+= link_to t("activerecord.back"), :back, class: "button"
