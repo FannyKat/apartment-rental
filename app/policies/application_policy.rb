@@ -9,11 +9,11 @@ class ApplicationPolicy
   end
 
   def tenant?
-    user.tenant?
+    user.present? && user.tenant?
   end
 
   def owner?
-    user.owner?
+    user.present? && user.owner?
   end
 
   def index?
@@ -38,6 +38,10 @@ class ApplicationPolicy
 
   def edit?
     update?
+  end
+
+  def dashboard?
+    user.admin?
   end
 
   class Scope

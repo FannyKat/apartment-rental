@@ -1,17 +1,29 @@
-%h1 Modifier l'appartement
+.title.is-3 Modifier l'appartement #{@apartment.title}
 
-= simple_form_for @apartment do |f|
-  .field
-    = f.input :rent_amount, input_html: { class: 'input', placeholder: 'Prix du loyer' }
-  
-  .field
-    = f.input :location, input_html: { class: 'input', placeholder: 'Localisation' }
-  
-  .field
-    = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: 'Nombre de chambres' }
-  
-  .field
-    = f.input :amenities, input_html: { class: 'input', placeholder: 'Équipements' }
-  
-  .actions
-    = f.submit 'Enregistrer', class: 'button is-primary'
+.container
+  .columns
+    .column.is-one-third
+      .card
+        .card-image
+          %figure.image.is-4by3
+            - if @apartment.image.attached?
+              = image_tag @apartment.image
+
+    .column
+      .card-content
+        = simple_form_for @apartment do |f|
+          = f.input :title, autofocus: true, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.title') }
+
+          = f.input :rent_amount, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.rent_amount') }
+        
+          = f.input :location, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.location') }
+        
+          = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.number_of_bedrooms') }
+        
+          = f.input :amenities, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.amenities') }
+          
+          = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
+
+          .actions
+            = f.submit 'Enregistrer', class: 'button has-background-link-light'
+            = link_to t("activerecord.back"), :back, class: "button"

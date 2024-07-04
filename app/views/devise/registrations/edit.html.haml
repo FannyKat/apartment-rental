@@ -1,40 +1,49 @@
-%h2= "Edit #{resource_name.to_s.humanize}"
+.devise-card
+  .card
+    .card-header
+      .card-header-title= t('website.navbar.account')
 
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
+    .card-content
+      .media
+        .media-left
+          %figure.image.is-96x96
+            - if current_user.avatar.attached?
+              = image_tag current_user.avatar, class: "is-rounded"
+            - else
+              = image_tag 'missing.png', class: "is-rounded"
+        .media-content
+          %p.title.is-3=current_user.full_name_humanized
+          .ownership-request
+            Status de votre demande :  
+            #status= OwnershipRequest.is_requested?(current_user) 
 
-  .field
-    .control
-      = f.input :email, autofocus: true, autocomplete: "email", input_html: { class: "input", placeholder: "Email" }
+          = link_to t('website.button.become_owner'), new_ownership_request_path, class:"button has-background-link-light become-owner-btn"
 
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
 
-  .field
-    .control
-      - if @minimum_password_length
-        %em= t('devise.shared.minimum_password_length', count: @minimum_password_length)
-        = f.input :password, autofocus: true, autocomplete: "new-password", placeholder: "Nouveau mot de passe"
-        %i (leave blank if you don't want to change it)
-  .field
-    .control
-      = f.input :password_confirmation, autocomplete: "new-password", placeholder: "Nouveau mot de passe" 
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+        = render "devise/shared/error_messages", resource: resource
 
-  .field
-    = f.input :current_password, autocomplete: "current-password", placeholder: "Mot de passe actuel"
-    %i (we need your current password to confirm your changes)
-    %br
+        = f.input :avatar, as: :file, input_html: { class: "input" }
 
-  .field.dropdown
-    = f.input :role, collection: User.roles.except(:admin).keys.map { |role| role.humanize }, include_blank: false, label: false
-    %br
+        = f.input :email, autofocus: true, autocomplete: "email", input_html: { class: "input", placeholder: "Email" }
+        
+        = f.input :first_name, autocomplete: "first_name", input_html: { class: "input", placeholder: "Nom" }
+        
+        = f.input :last_name, autocomplete: "last_name", input_html: { class: "input", placeholder: "Prénom" }
+        
+        - if @minimum_password_length
+          %em= t('devise.shared.minimum_password_length', count: @minimum_password_length)
+          = f.input :password, autofocus: true, autocomplete: "new-password", placeholder: t('devise.passwords.edit.change_your_password')
+          %i= t("devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it")
+        
+        = f.input :password_confirmation, autocomplete: "new-password", placeholder: t('devise.passwords.edit.confirm_new_password')
 
-  .actions
-    = f.submit "Update", class: "button is-primary"
+        = f.input :current_password, autocomplete: "current-password", placeholder: t('activerecord.attributes.user.current_password')
+        %i= t("devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes")
+        
+        .card-footer
+          = f.submit t("devise.registrations.edit.update"), class: "button has-background-link-light"
 
-%br
-%h3 Cancel my account
-= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "button is-danger"
+          //= button_to t("devise.registrations.edit.cancel_my_account"), registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "button is-danger"
 
-= link_to t("activerecord.back"), :back, class: "button"
+          = link_to t("activerecord.back"), :back, class: "button"

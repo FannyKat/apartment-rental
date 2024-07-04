@@ -1,12 +1,18 @@
 class Apartment < ApplicationRecord
-  belongs_to :user
+  # Associations
+  belongs_to :owner, class_name: 'User'
 
   has_many :bookings, dependent: :destroy
 
-  has_one_attached :image
+  # Active Storage image
+  has_one_attached :image do |attachable|
+    attachable.variant :medium, resize_to_limit: [300, 300]
+  end
 
   # Validations
-  validates :location, presence: true
-  validates :rent_amount, presence: true
-  validates :number_of_bedrooms, presence: true
+  validates :title, :location, :rent_amount, :number_of_bedrooms, :amenities, presence: true
+
+  def formated_amount
+    (self.rent_amount ? self.rent_amount.to_s + ' €' : "prix non renseigné")
+  end
 end

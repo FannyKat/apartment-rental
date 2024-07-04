@@ -1,47 +1,9 @@
-%h1 Recherchez un appartement
-%br/
+- if policy(:user).tenant? || policy(:user).public?
 
-- if policy(:user).search?
-  = form_tag(search_apartments_path, method: :get) do
-    = text_field_tag :location, params[:location], placeholder: "Localisation", class: 'input'
-    = number_field_tag :max_rent, params[:max_rent], placeholder: "Prix maximum", class: 'input'
-    = number_field_tag :bedrooms, params[:bedrooms], placeholder: "Nombre de chambres", class: 'input'
-    = submit_tag "Rechercher", class: 'button is-primary'
+  = render "layouts/search_apartment" 
 
-%br/
-%h1 Liste des appartements en location
+- elsif policy(:user).owner? and OwnershipRequest.find_by(tenant_id: current_user.id).status == 'accepted'
 
-- if policy(:user).create?
-  = link_to "Créer un appartement", new_apartment_path, class: "button is-primary"
-
-- if @apartments.any?
-  - @apartments.each do |apartment|
-    .card
-      .card-header
-        .card-header-title Appartement
-        %button.card-header-icon{aria: {label: "more options"}}
-          %span.icon
-            %i.fas.fa-angle-down{aria: {hidden: "true"}}
-      .card-content
-        .content
-          - if apartment.image.attached?
-            =image_tag apartment.image.variant(resize_to_fit: [500,500])
-          %div 
-            %strong Prix :
-            = apartment.rent_amount
-          %div
-            %strong Nombre de chambres :
-            = apartment.number_of_bedrooms 
-          %div
-            %strong  Localisation :
-            = apartment.location
-          %div
-            %strong Commodités :
-            = apartment.amenities
-      .card-footer
-        - if policy(:user).owner?
-          = render partial: 'layouts/card_actions', locals: { apartment: apartment }
-        - elsif policy(:user).tenant?
-          = link_to "Louer", new_booking_path(apartment_id: apartment.id), remote: true, class: "card-footer-item"
-- else
-  %p Vous n'avez pas d'appartements en location.
+  = link_to(new_apartment_path, class: "button has-background-link-light owner-create-btn is-rounded") do
+    %i.fa-solid.fa-plus
+= render "apartments/listing"

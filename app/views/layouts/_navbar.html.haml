@@ -1,28 +1,61 @@
-%nav.navbar{role: "navigation", aria: {label: "main navigation"}}
+%nav.navbar.has-background-link-light{role: "navigation", aria: {label: "main navigation"}}
   .navbar-brand
-    %a.navbar-burger{role: "button", aria: {label: "menu", expanded: "false"}, data: {target: "navbarBasicExample"}}
+    %a.navbar-title.navbar-item{href: "/"} 
+      AppartRent
+    %a.navbar-burger{role: "button", data: {target: "navbarApartmentRental"}}
       %span{aria: {hidden: "true"}}
       %span{aria: {hidden: "true"}}
       %span{aria: {hidden: "true"}}
       %span{aria: {hidden: "true"}}
-  #navbarBasicExample.navbar-menu
+  #navbarApartmentRental.navbar-menu
     .navbar-start
-      %a.navbar-item{href: root_path, class: "button"}
-        Apartment Rental
+      %a.navbar-item
+        - if current_user and current_user.owner?
+          = button_to "Mode Locataire", switch_role_path, method: :patch, class: 'navbar-item'
+        - elsif current_user and current_user.tenant?
+          = button_to "Mode Hôte", switch_role_path, method: :patch, class: 'navbar-item'
 
     - if current_user
       .navbar-end
-        .navbar-item.has-dropdown.is-hoverable.button
-          %a.navbar-link
-            = current_user.email
+        .navbar-item.has-dropdown.is-hoverable
+          .navbar-link
+            .image.is-32x32
+              - if current_user.avatar.attached?
+                = image_tag current_user.avatar, class: "is-rounded"
+              - else
+                = image_tag 'missing.png', class: "is-rounded"
+            = current_user.full_name_humanized
           .navbar-dropdown.is-right
-            = link_to 'Appartements', apartments_path, class: 'navbar-item'
+            = link_to t('website.navbar.apartments'), apartments_path, class: 'navbar-item'
             - if policy(:user).admin_dashboard?
               = link_to 'Administration', rails_admin_path, class: 'navbar-item'
             - elsif policy(:user).owner? || policy(:user).tenant?
-              = link_to 'Réservations', bookings_path, class: 'navbar-item'
+              = link_to t('website.navbar.bookings'), bookings_path, class: 'navbar-item'
+            = link_to t('website.navbar.account'), edit_user_registration_path, class: 'navbar-item'
 
             %hr.navbar-divider
-            = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'navbar-item'
+              = button_to t('website.navbar.logout'), destroy_user_session_path, method: :delete, class: 'navbar-item'
     - else
-      = link_to 'Login', new_user_session_path, class: 'navbar-item'
+      .navbar-end
+        .navbar-item.has-dropdown.is-hoverable
+          .navbar-link
+            .image.is-32x32
+              = image_tag 'missing.png', class: "is-rounded"
+          .navbar-dropdown.is-right
+            = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'navbar-item'
+
+:javascript
+  document.addEventListener('DOMContentLoaded', () => {
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  });

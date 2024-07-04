@@ -1,0 +1,21 @@
+.apartment-card
+  .card
+    .card-header
+      .title.is-5 Litige pour le logement #{@booking.apartment.title}
+
+    .container
+      .card
+        .card-content
+          .control
+            %strong Description du litige :
+            = @dispute.description
+          .control
+            %strong Status du litige :
+            = @dispute.status
+          .control
+            %strong Locataire :
+            = @booking.tenant.full_name_humanized
+
+            = @dispute.image if @dispute.image.attached?
+          .card-footer
+            = link_to t("activerecord.back"), :back, class: "button"

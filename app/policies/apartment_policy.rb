@@ -1,22 +1,26 @@
 class ApartmentPolicy < ApplicationPolicy
+  def index?
+    true
+  end
+
   def show?
     user.tenant? || user.owner? || user.admin?
   end
 
   def create?
-    user.owner? || user.admin?
+    user.owner?
   end
 
   def update?
-    user.owner? || user.admin?
+    user.owner?
   end
 
   def destroy?
-    user.owner? || user.admin?
+    user.owner?
   end
 
   def search?
-    user.tenant? || user.owner?
+    true
   end
 
   def reserve?
@@ -29,5 +33,19 @@ class ApartmentPolicy < ApplicationPolicy
 
   def reject_reservation?
     user.owner?
+  end
+
+  class Scope < Scope
+    def resolve
+      if user.admin?
+        scope.all
+      elsif user.owner?
+        scope.where(owner_id: user.id)
+      elsif user.tenant?
+        scope.all
+      else
+        scope.none
+      end
+    end
   end
 end

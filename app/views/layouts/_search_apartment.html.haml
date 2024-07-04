@@ -1,0 +1,10 @@
+.title.is-5 Logements
+
+.search-bar
+  = form_tag(search_apartments_path, method: :get, class: "search-form") do
+    = text_field_tag :location, params[:location], placeholder: "Localisation", class: 'input'
+    = number_field_tag :min_rent, params[:min_rent], placeholder: "Prix minimum", class: 'input'
+    = number_field_tag :max_rent, params[:max_rent], placeholder: "Prix maximum", class: 'input'
+    = number_field_tag :bedrooms, params[:bedrooms], placeholder: "Nombre de chambres", class: 'input'
+    = button_tag(type: 'submit', class: 'button has-background-link-light is-rounded') do
+      %i.fa-solid.fa-magnifying-glass

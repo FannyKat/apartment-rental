@@ -1,50 +1,31 @@
-%h1 Vos réservations
 
-- if @bookings.any?
-  - @bookings.each do |booking|
-    .card
-      .card-header
-        %p.card-header-title Réservations
-        %button.card-header-icon{ aria: { label: "more options" } }
-          %span.icon
-            %i.fas.fa-angle-down{ aria: { hidden: "true" } }
-
-      .card-content
-        .content
-          %div
-            - if booking.apartment.image.attached?
-              = image_tag booking.apartment.image.variant(resize_to_fit: [500,500])
-          %div 
-            %strong Locataire : 
-            = User.find_by(id: booking.user_id).email
-          %div 
-            %strong Appartement : 
-            = booking.apartment.id
-          %div 
-            %strong Localisation : 
-            = booking.apartment.location
-          %div 
-            %strong Prix : 
-            = booking.apartment.rent_amount
-          %div 
-            %strong Nombre de Chambres : 
-            = booking.apartment.number_of_bedrooms
-          %div 
-            %strong Status : 
-            =booking.status
-
-      .card-footer
-        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
-          = f.hidden_field :status, value: 'pending'
-          = f.submit 'Mettre en attente', class: 'button is-info card-footer-item'
-
-        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
-          = f.hidden_field :status, value: 'accepted'
-          = f.submit 'Accepter', class: 'button is-success card-footer-item'
-
-        = form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f|
-          = f.hidden_field :status, value: 'rejected'
-          = f.submit 'Rejeter', class: 'button is-danger card-footer-item'
-      
-- else
-  %p Vous n'avez pas de réservations pour le moment.
+.apartment-card
+  .card
+    .card-header
+      .title.is-4= @booking.apartment.title
+    .card-content
+      .content
+        .card-image
+          - if @booking.apartment.image.attached? && @booking.apartment.image.variable?
+            = image_tag @booking.apartment.image.variant(:medium)
+        .control 
+          %strong Hôte :
+          = @booking.apartment.owner.full_name_humanized
+        .control 
+          %strong Prix :
+          = @booking.apartment.formated_amount
+        .control
+          %strong Nombre de chambres :
+          = @booking.apartment.number_of_bedrooms 
+        .control
+          %strong  Localisation :
+          = @booking.apartment.location
+        .control
+          %strong Commodités :
+          = @booking.apartment.amenities
+    .card-footer 
+      %strong Loué du #{@booking.start_date.to_date} au #{@booking.end_date.to_date}
+    .dispute-btn
+      = link_to 'Déclarer un litige', new_dispute_path(booking_id: @booking.id), class: "button is-warning"
+    .dispute-btn
+      = link_to 'Voir les litiges', disputes_path(booking_id: @booking.id), class: "button is-info"

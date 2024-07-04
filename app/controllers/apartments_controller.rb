@@ -1,24 +1,31 @@
 class ApartmentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_apartment, only: [:edit, :update, :destroy]
+  #before_action :authenticate_user!
+  before_action :set_apartment, only: [:show, :edit, :update, :destroy]
 
-  after_action :verify_authorized, except: :index
+  after_action :verify_authorized
 
   def index
-    @apartments = Apartment.all
+    @apartments = policy(:user).owner? ? current_user.apartments : Apartment.all
+
+    authorize @apartments
   end
 
   def show
-    @apartments = current_user.apartments.all
-    authorize @apartments
+    @apartment
+
+    authorize @apartment
   end
 
   def search
     @apartments = Apartment.all
+
     authorize @apartments
+
     @apartments = @apartments.where("location ILIKE ?", "%#{params[:location]}%") if params[:location].present?
+    @apartments = @apartments.where("rent_amount >= ?", params[:min_rent]) if params[:min_rent].present?
     @apartments = @apartments.where("rent_amount <= ?", params[:max_rent]) if params[:max_rent].present?
     @apartments = @apartments.where(number_of_bedrooms: params[:bedrooms]) if params[:bedrooms].present?
+
     render :index
   end
 
@@ -27,28 +34,35 @@ class ApartmentsController < ApplicationController
     authorize @apartment
   end
 
-  def update
-    authorize @apartment
-
-    if @apartment.update!(apartment_params)
-      redirect_to @apartment, flash[:success] = 'Booking was successfully updated !'
-    else
-      render :edit, flash[:error] = "Booking not updated !"
-    end
-  end
-
   def edit
     authorize @apartment
   end
 
-  def create
-    @apartment = current_user.apartments.build(apartment_params)
+  def update
     authorize @apartment
 
-    if @apartment.save!
-      redirect_to apartments_url
+    if @apartment.update(apartment_params)
+      @apartments = current_user.apartments
+      redirect_to apartments_path
+      flash[:success] = 'Apartment was successfully updated !'
     else
-      render :new
+      redirect_to edit_apartment_path
+      flash[:danger] = "Apartment not updated !"
+    end
+  end
+
+  def create
+    @apartment = Apartment.create(apartment_params)
+    @apartment.owner = current_user
+
+    authorize @apartment
+
+    if @apartment.save
+      redirect_to apartments_path
+      flash[:success] = "Apartment was successfully created !"
+    else
+      redirect_to new_apartment_path
+      flash[:danger] = "Apartment was not created."
     end
   end
 
@@ -59,7 +73,8 @@ class ApartmentsController < ApplicationController
       flash[:success] = 'Apartment was successfully destroyed.'
       redirect_to apartments_path
     else
-      redirect_to @apartment, flash[:error] = 'Failed to destroy apartment.'
+      redirect_to @apartment
+      flash[:danger] = 'Failed to destroy apartment.'
     end
   end
 
@@ -70,6 +85,6 @@ class ApartmentsController < ApplicationController
   end
 
   def apartment_params
-    params.require(:apartment).permit(:rent_amount, :number_of_bedrooms, :location, :amenities, :image)
+    params.require(:apartment).permit(:rent_amount, :number_of_bedrooms, :location, :amenities, :image, :title)
   end
 end

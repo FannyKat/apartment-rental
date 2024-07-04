@@ -41,10 +41,6 @@ gem "dartsass-rails", "~> 0.5.0"
 
 gem 'haml-rails'
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -56,8 +52,12 @@ gem 'mini_magick'
 
 gem "image_processing", "~> 1.2"
 
+gem 'aasm'
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
+  gem 'rspec-rails'
+  gem 'rspec-core'
 end
 
 group :development do
@@ -68,8 +68,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-gem "cssbundling-rails"
-gem "cssbundling-rails"
-gem "cssbundling-rails"
-gem "cssbundling-rails"
-gem "cssbundling-rails"

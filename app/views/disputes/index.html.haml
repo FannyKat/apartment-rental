@@ -1,0 +1,32 @@
+.listing
+  - if @disputes.any?
+    - @disputes.each do |dispute|
+      .card
+        .card-header
+          .card-header-title Litige pour #{@booking.apartment.title}
+
+        .card-content
+          .content
+            .control 
+              %strong Locataire : 
+              = @booking.tenant.full_name_humanized
+            .control 
+              %strong Localisation : 
+              = @booking.apartment.location
+            .control 
+              %strong Du :
+              = @booking.start_date.to_date
+            .control 
+              %strong Au :
+              = @booking.end_date.to_date
+            .control 
+              %strong Message du locataire :
+              = dispute.description
+            .control 
+              %strong Status : 
+              = dispute.status
+
+        .card-footer
+          = link_to t("activerecord.back"), :back, class: "button"
+  - else
+    Pas de litiges en cours.

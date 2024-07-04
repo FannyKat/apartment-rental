@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_03_161705) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_05_153748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,44 +43,73 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_161705) do
   end
 
   create_table "apartments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "location"
-    t.decimal "rent_amount"
-    t.integer "number_of_bedrooms"
-    t.text "amenities"
+    t.bigint "owner_id", null: false
+    t.string "location", default: "", null: false
+    t.string "title", default: "", null: false
+    t.text "amenities", default: "", null: false
+    t.integer "number_of_bedrooms", default: 0, null: false
+    t.integer "rent_amount", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_apartments_on_user_id"
+    t.index ["owner_id"], name: "index_apartments_on_owner_id"
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "tenant_id", null: false
     t.bigint "apartment_id", null: false
-    t.integer "status", default: 0
+    t.string "status", default: "pending", null: false
+    t.text "message", default: "", null: false
+    t.datetime "start_date", precision: nil
+    t.datetime "end_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start_date"
-    t.date "end_date"
     t.index ["apartment_id"], name: "index_bookings_on_apartment_id"
-    t.index ["user_id"], name: "index_bookings_on_user_id"
+    t.index ["tenant_id"], name: "index_bookings_on_tenant_id"
+  end
+
+  create_table "disputes", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.bigint "user_id", null: false
+    t.text "description", default: "", null: false
+    t.string "status", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_disputes_on_booking_id"
+    t.index ["user_id"], name: "index_disputes_on_user_id"
+  end
+
+  create_table "ownership_requests", force: :cascade do |t|
+    t.bigint "tenant_id", null: false
+    t.string "status", default: "pending", null: false
+    t.string "email", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_ownership_requests_on_tenant_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "role", default: "tenant", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role", default: "tenant", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "apartments", "users"
+  add_foreign_key "apartments", "users", column: "owner_id"
   add_foreign_key "bookings", "apartments"
-  add_foreign_key "bookings", "users"
+  add_foreign_key "bookings", "users", column: "tenant_id"
+  add_foreign_key "disputes", "bookings"
+  add_foreign_key "disputes", "users"
+  add_foreign_key "ownership_requests", "users", column: "tenant_id"
 end

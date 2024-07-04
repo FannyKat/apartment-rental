@@ -23,15 +23,21 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
-  def search?
-    user.owner? || user.tenant?
+  def public?
+    !user.present?
   end
 
-  def permitted_attributes
-    if user.id == record.id
-      [:email, :password, :password_confirmation, :current_password, :role]
-    else
-      [:email, :password, :password_confirmation, :current_password]
+  class Scope < Scope
+    def resolve
+      if user.admin?
+        scope.all
+      elsif user.owner?
+        scope.where(owner_id: user.id)
+      elsif user.tenant?
+        scope.where(tenant_id: user.id)
+      else
+        scope.none
+      end
     end
   end
 end

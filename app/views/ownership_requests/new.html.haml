@@ -1,0 +1,19 @@
+.devise-card
+  .card
+    .card-content
+      .title.is-4= "Votre demande pour devenir proprio"
+
+      = simple_form_for(@ownership_request, url: ownership_requests_path, wrapper: :bulma_form) do |f|
+        = f.hidden_field :tenant_id, value: current_user.id
+        
+        = f.input :email, autofocus: true, required: true, hint: "Please enter your email address.", input_html: { class: 'input', placeholder: 'Email' }
+
+        = f.input :first_name, required: true, hint: "Please enter your first name.", input_html: { class: 'input' , value: "#{current_user.first_name}"}
+        
+        = f.input :last_name, required: true, hint: "Please enter your last name.", input_html: { class: 'input' , value: "#{current_user.last_name}" }
+
+        = f.input :cin, as: :file
+
+        .card-footer
+          = f.submit 'Request Ownership', class: "button is-primary"
+          = link_to t("activerecord.back"), :back, class: "button"

@@ -1,2 +1,135 @@
-// Sassy
 @use "bulma";
+
+// Titles
+
+.title {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+// Navbar
+
+.navbar-title {
+  font-size: 1.5rem;
+}
+
+.navbar-dropdown, 
+.navbar-link {
+  font-size: 1.1rem;
+}
+
+// Buttons
+
+.become-owner-btn {
+  margin: 1rem;
+}
+
+.owner-create-btn {
+  margin: 1rem;
+}
+
+.dispute-btn {
+  margin: 1rem;
+}
+
+// Cards
+
+.listing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .card {
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+}
+
+.card-footer {
+  gap: 1rem;
+  margin: 1rem;
+  justify-content: center;
+}
+
+.card-header-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+// Search
+
+.search-bar {
+  margin: 5rem;
+}
+
+.apartment-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3rem;
+}
+
+.devise-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+// SearchBar
+
+.search-bar {
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .input {
+    flex: 1;
+  }
+}
+
+.listing {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3rem;
+}
+
+.notification {
+  color: white;
+}
+
+.booking-dates {
+  display: flex;
+}
+
+textarea {
+  resize: none;
+  overflow-y: auto scroll; 
+
+  input {
+    height: auto;
+  }
+}
+
+#error_explanation {
+  color: red;
+}
+
+.ownership-request {
+  display: flex;
+  align-items: center;
+
+  #status {
+   color: var(--bulma-link);
+   font-weight: bold;
+  }
+}

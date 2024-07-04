@@ -1,8 +1,13 @@
 fr:
   activerecord:
     attributes:
+      model:
+        apartment:
+          title_apartment_list_tenant: Appartements en location
+          title_apartment_list_owner: Vos appartements en location
       user:
-        role: Rôle
+        become_owner: Devenir Hôte
+        become_tenant: Devenir locataire
         confirmation_sent_at: Date d'envoi de la confirmation
         confirmation_token: Clé de confirmation du mot de passe
         confirmed_at: Date de confirmation
@@ -22,6 +27,7 @@ fr:
         remember_me: Se souvenir de moi ?
         reset_password_sent_at: Clé de réinitialisation créée à
         reset_password_token: Clé de réinitialisation du mot de passe
+        role: Rôle
         sign_in_count: Nombre des connexions
         unconfirmed_email: Email non confirmé
         unlock_token: Clé de déverrouillage
@@ -29,18 +35,21 @@ fr:
     enums:
       user:
         role:
-          tenant: Locataire
-          owner: Propriétaire
           admin: Administrateur
+          owner: Hôte
+          tenant: Locataire
       booking:
+        accept: Accepter
+        reject: Rejeter
+        pending: Mettre en attente
         status:
-          pending: En attente
           accepted: Acceptée
+          pending: En attente
           rejected: Rejetée
     models:
-      user: Utilisateur
-      booking: Réservation
       apartment: Appartement
+      booking: Réservation
+      user: Utilisateur
     back: Retour
   devise:
     confirmations:
@@ -157,5 +166,37 @@ fr:
       not_found: n’a pas été trouvé(e)
       not_locked: n’était pas verrouillé(e)
       not_saved:
-        one: "une erreur a empêché ce (cet ou cette) %{resource} d’être enregistré(e) :"
+        one: "Une erreur a empêché ce (cet ou cette) %{resource} d’être enregistré(e) :"
         other: "%{count} erreurs ont empêché ce (cet ou cette) %{resource} d’être enregistré(e) :"
+  simple_form:
+    input:
+      required: Veuillez remplir ce champ
+    labels:
+      apartment:
+        amenities: Commodités
+        location: Localisation
+        number_of_bedrooms: Nombre de chambres
+        title: Titre
+        rent_amount: Prix du loyer
+        image: Image de l'appartement
+      user:
+        email: "Adresse email"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation du mot de passe"
+        current_password: "Mot de passe actuel"
+        role: "Rôle"
+    placeholders:
+      user:
+        email: "Adresse email"
+        password: "Mot de passe"
+        password_confirmation: "Confirmer le mot de passe"
+        current_password: "Mot de passe actuel"
+        role: "Sélectionner le rôle"
+  website:
+    button:
+      become_owner: Vous voulez devenir Hôte ?
+    navbar:
+      apartments: Logements
+      bookings: Réservations
+      account: Mon Compte
+      logout: Se déconnecter

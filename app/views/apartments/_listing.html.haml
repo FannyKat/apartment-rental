@@ -1,0 +1,32 @@
+.listing
+  - if @apartments.any?
+    - @apartments.each do |apartment|
+      .card
+        .card-header-title
+          %i.fa-solid.fa-house
+          = apartment.title
+        .card-content
+          .content
+            .card-image
+              - if apartment.image.attached? && apartment.image.variable?
+                = image_tag apartment.image.variant(:medium)
+            %div
+              %strong Hôte : 
+              = apartment.owner.email
+            %div 
+              %strong Prix :
+              = apartment.formated_amount
+            %div
+              %strong Nombre de chambres :
+              = apartment.number_of_bedrooms 
+            %div
+              %strong  Localisation :
+              = apartment.location
+            %div
+              %strong Commodités :
+              = apartment.amenities
+        .card-footer
+          = render partial: 'apartments/card_actions', locals: { apartment: apartment }
+      
+  - else
+    %p Aucun résultats de recherche.
