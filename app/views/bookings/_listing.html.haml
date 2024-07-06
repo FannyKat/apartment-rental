@@ -3,7 +3,7 @@
     - @bookings.each do |booking|
       .card
         .card-header
-          .card-header-title Réservations pour #{booking.apartment.title}
+          .card-header-title= t('website.title.rents_for') + booking.apartment.title
 
         .card-content
           .content
@@ -11,43 +11,43 @@
               - if booking.apartment.image.attached?
                 = image_tag booking.apartment.image.variant(:medium)
             .control 
-              %strong Locataire : 
+              %strong= t('website.role.tenant')
               = booking.tenant.full_name_humanized
             .control
-              %strong Email :
+              %strong= t('activerecord.attributes.user.email')
               = booking.tenant.email
             .control 
-              %strong Localisation : 
+              %strong= t('website.apartment.localisation')
               = booking.apartment.location
             .control 
-              %strong Prix : 
+              %strong= t('website.apartment.rent_amount')
               = booking.apartment.formated_amount
             .control 
-              %strong Nombre de Chambres : 
+              %strong= t('website.apartment.number_of_bedrooms')
               = booking.apartment.number_of_bedrooms
               
             .control 
-              %strong Du :
+              %strong= t('website.date.from')
               = booking.start_date.to_date
             .control 
-              %strong Au :
+              %strong= t('website.date.at')
               = booking.end_date.to_date
             .control 
-              %strong Message du locataire :
+              %strong= t('website.booking.tenant_message')
               = booking.message
             .control 
-              %strong Status : 
+              %strong= t('website.booking.status')
               = booking.status
 
         .card-footer
           - if policy(:booking).manage_booking?
             - if booking.accepted?
-              = link_to 'Voir', booking_path(booking), class: "button is-warning"
-            = button_to 'Accepter', accepted_booking_path(booking), method: :patch, class: "button is-success" if booking.may_accepted?
-            = button_to 'Rejeter', rejected_booking_path(booking), method: :patch, class: "button is-danger" if booking.may_rejected?
-            = button_to 'Mettre en attente', pending_booking_path(booking), method: :patch, class: "button has-background-link-light" if booking.may_pending?
+              = link_to t('website.button.to_view'), booking_path(booking), class: "button is-warning"
+            = button_to t('website.button.to_accept'), accepted_booking_path(booking), method: :patch, class: "button is-success" if booking.may_accepted?
+            = button_to t('website.button.to_reject'), rejected_booking_path(booking), method: :patch, class: "button is-danger" if booking.may_rejected?
+            = button_to t('website.button.to_put_on_hold'), pending_booking_path(booking), method: :patch, class: "button has-background-link-light" if booking.may_pending?
           - else
             - if policy(booking).destroy?
-              = button_to 'Annuler', booking_path(booking.id), method: :delete, class: "button is-light"
+              = button_to t('website.button.to_cancel'), booking_path(booking.id), method: :delete, class: "button is-light"
   - else
-    %p Vous n'avez pas de demande de réservations pour le moment.
+    %p= t('website.listing.no_bookings')

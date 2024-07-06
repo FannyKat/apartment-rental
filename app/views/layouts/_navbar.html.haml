@@ -7,13 +7,22 @@
       %span{aria: {hidden: "true"}}
       %span{aria: {hidden: "true"}}
       %span{aria: {hidden: "true"}}
+      
   #navbarApartmentRental.navbar-menu
     .navbar-start
-      %a.navbar-item
-        - if current_user and current_user.owner?
-          = button_to "Mode Locataire", switch_role_path, method: :patch, class: 'navbar-item'
-        - elsif current_user and current_user.tenant?
-          = button_to "Mode Hôte", switch_role_path, method: :patch, class: 'navbar-item'
+      - if I18n.locale == :fr
+        = link_to(url_for(locale: :en), class: 'navbar-item') do
+          %i.fa-solid.fa-globe
+      - else
+        = link_to(url_for(locale: :fr), class: 'navbar-item') do
+          %i.fa-solid.fa-globe
+
+      - if current_user
+        %a.navbar-item
+          - if current_user.owner?
+            = button_to t('website.button.tenant_mode'), switch_role_path, method: :patch, class: 'navbar-item'
+          - elsif current_user.tenant?
+            = button_to t('website.button.owner_mode'), switch_role_path, method: :patch, class: 'navbar-item'
 
     - if current_user
       .navbar-end
@@ -24,7 +33,7 @@
                 = image_tag current_user.avatar, class: "is-rounded"
               - else
                 = image_tag 'missing.png', class: "is-rounded"
-            = current_user.full_name_humanized
+            #navbar-username= current_user.full_name_humanized
           .navbar-dropdown.is-right
             = link_to t('website.navbar.apartments'), apartments_path, class: 'navbar-item'
             - if policy(:user).admin_dashboard?

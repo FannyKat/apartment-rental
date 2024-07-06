@@ -24,6 +24,8 @@ gem "devise"
 
 gem "pundit"
 
+gem 'faker'
+
 # Translation i18n
 gem 'rails-i18n', '~> 7.0.0'
 

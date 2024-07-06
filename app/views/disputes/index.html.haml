@@ -3,30 +3,30 @@
     - @disputes.each do |dispute|
       .card
         .card-header
-          .card-header-title Litige pour #{@booking.apartment.title}
+          .card-header-title= t('website.title.dispute') + @booking.apartment.title
 
         .card-content
           .content
             .control 
-              %strong Locataire : 
+              %strong= t('website.role.tenant') 
               = @booking.tenant.full_name_humanized
             .control 
-              %strong Localisation : 
+              %strong= t('website.apartment.localisation')
               = @booking.apartment.location
             .control 
-              %strong Du :
+              %strong= t('website.date.from')
               = @booking.start_date.to_date
             .control 
-              %strong Au :
+              %strong= t('website.date.at')
               = @booking.end_date.to_date
             .control 
-              %strong Message du locataire :
+              %strong= t('website.booking.tenant_message')
               = dispute.description
             .control 
-              %strong Status : 
+              %strong= t('website.booking.status')
               = dispute.status
 
         .card-footer
-          = link_to t("activerecord.back"), :back, class: "button"
+          = link_to t("website.button.back"), :back, class: "button"
   - else
-    Pas de litiges en cours.
+    = t('website.listing.no_disputes')

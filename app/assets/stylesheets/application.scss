@@ -20,6 +20,10 @@
   font-size: 1.1rem;
 }
 
+#navbar-username {
+  margin-left: 0.5rem;
+}
+
 // Buttons
 
 .become-owner-btn {
@@ -41,6 +45,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin: 1rem;
 
   .card {
     padding: 10px;
@@ -53,12 +58,15 @@
 .card-footer {
   gap: 1rem;
   margin: 1rem;
+  padding: 1rem;
   justify-content: center;
 }
 
+.card-header {
+  justify-content: space-around;
+}
+
 .card-header-title {
-  display: flex;
-  align-items: center;
   justify-content: space-evenly;
 }
 
@@ -107,8 +115,9 @@
   color: white;
 }
 
-.booking-dates {
+.date-fields {
   display: flex;
+  justify-content: space-evenly;
 }
 
 textarea {

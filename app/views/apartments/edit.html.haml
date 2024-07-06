@@ -1,4 +1,4 @@
-.title.is-3 Modifier l'appartement #{@apartment.title}
+.title.is-3= t('website.title.edit_apartment') + @apartment.title
 
 .container
   .columns
@@ -8,22 +8,24 @@
           %figure.image.is-4by3
             - if @apartment.image.attached?
               = image_tag @apartment.image
+            - else
+              = image_tag 'missing.png'
 
     .column
       .card-content
         = simple_form_for @apartment do |f|
-          = f.input :title, autofocus: true, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.title') }
+          = f.input :title, autofocus: true, input_html: { class: 'input', placeholder: t('website.apartment.title') }
 
-          = f.input :rent_amount, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.rent_amount') }
+          = f.input :rent_amount, input_html: { class: 'input', placeholder: t('website.apartment.rent_amount') }
         
-          = f.input :location, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.location') }
+          = f.input :location, input_html: { class: 'input', placeholder: t('website.apartment.location') }
         
-          = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.number_of_bedrooms') }
+          = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: t('website.apartment.number_of_bedrooms') }
         
-          = f.input :amenities, input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.amenities') }
+          = f.input :amenities, input_html: { class: 'input', placeholder: t('website.apartment.amenities') }
           
           = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
 
           .actions
-            = f.submit 'Enregistrer', class: 'button has-background-link-light'
-            = link_to t("activerecord.back"), :back, class: "button"
+            = f.submit t('website.button.to_confirm'), class: 'button has-background-link-light'
+            = link_to t("website.button.back"), :back, class: "button"

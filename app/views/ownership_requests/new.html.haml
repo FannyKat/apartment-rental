@@ -1,7 +1,7 @@
 .devise-card
   .card
     .card-content
-      .title.is-4= "Votre demande pour devenir proprio"
+      .title.is-4= t('website.title.owner_request')
 
       = simple_form_for(@ownership_request, url: ownership_requests_path, wrapper: :bulma_form) do |f|
         = f.hidden_field :tenant_id, value: current_user.id
@@ -15,5 +15,5 @@
         = f.input :cin, as: :file
 
         .card-footer
-          = f.submit 'Request Ownership', class: "button is-primary"
-          = link_to t("activerecord.back"), :back, class: "button"
+          = f.submit t('website.button.to_confirm'), class: "button is-primary"
+          = link_to t("website.button.back"), :back, class: "button"

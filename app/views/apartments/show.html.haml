@@ -9,17 +9,17 @@
           - if @apartment.image.attached? && @apartment.image.variable?
             = image_tag @apartment.image.variant(:medium)
         .control 
-          %strong Hôte :
+          %strong= t('website.role.owner')
           = @apartment.owner.full_name_humanized
         .control 
-          %strong Prix :
+          %strong= t('website.apartment.rent_amount')
           = @apartment.formated_amount
         .control
-          %strong Nombre de chambres :
+          %strong= t('website.apartment.number_of_bedrooms')
           = @apartment.number_of_bedrooms 
         .control
-          %strong  Localisation :
+          %strong= t('website.apartment.location')
           = @apartment.location
         .control
-          %strong Commodités :
+          %strong= t('website.apartment.amenities')
           = @apartment.amenities

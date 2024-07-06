@@ -1,0 +1,39 @@
+fr:
+  simple_form:
+    "yes": "Oui"
+    "no": "Non"
+    required:
+      text: Obligatoire
+      mark: ""
+    input:
+      required: Veuillez remplir ce champ
+    labels:
+      defaults:
+        amenities: Commodités
+        location: Localisation
+        number_of_bedrooms: Nombre de chambres
+        title: Titre
+        rent_amount: Prix du loyer
+        image: Image de l'appartement
+        first_name: Prénom
+        last_name: Nom
+        cin: Carte d'identité
+    hints:
+      defaults:
+        cin: Carte d'identité obligatoire
+    placeholder:
+      first_name: Prénom
+      last_name: Nom
+      cin: Carte d'identité
+      password: Mot de passe
+      password_confirmation: Confirmer votre mot de passe
+    file:
+      defaults:
+        avatar:
+          choose: Choisir un fichier
+          no_choose: Pas de fichier choisit
+        cin:
+          choose: Choisir un fichier
+          no_choose: Pas de fichier choisit
+    error_notification:
+      default_message: "Veuillez vérifier les problèmes ci-dessous :"

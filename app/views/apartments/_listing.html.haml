@@ -11,22 +11,21 @@
               - if apartment.image.attached? && apartment.image.variable?
                 = image_tag apartment.image.variant(:medium)
             %div
-              %strong Hôte : 
-              = apartment.owner.email
+              %strong= t('website.role.owner')
+              = apartment.owner.full_name_humanized
             %div 
-              %strong Prix :
+              %strong= t('website.apartment.rent_amount')
               = apartment.formated_amount
             %div
-              %strong Nombre de chambres :
+              %strong= t('website.apartment.number_of_bedrooms')
               = apartment.number_of_bedrooms 
             %div
-              %strong  Localisation :
+              %strong= t('website.apartment.localisation')
               = apartment.location
             %div
-              %strong Commodités :
+              %strong= t('website.apartment.amenities')
               = apartment.amenities
-        .card-footer
-          = render partial: 'apartments/card_actions', locals: { apartment: apartment }
+        = render partial: 'apartments/card_actions', locals: { apartment: apartment }
       
   - else
-    %p Aucun résultats de recherche.
+    %p=t('website.listing.no_results')

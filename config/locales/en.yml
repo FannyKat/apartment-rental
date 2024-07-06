@@ -1,31 +1,96 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        become_owner: Become Host
+        become_tenant: Become Tenant
+        confirmation_sent_at: Confirmation Sent At
+        confirmation_token: Password Confirmation Token
+        confirmed_at: Confirmed At
+        created_at: Created At
+        current_password: Current Password
+        current_sign_in_at: Current Sign In At
+        current_sign_in_ip: Current Sign In IP
+        email: Email
+        encrypted_password: Encrypted Password
+        failed_attempts: Failed Attempts
+        last_sign_in_at: Last Sign In At
+        last_sign_in_ip: Last Sign In IP
+        locked_at: Locked At
+        password: Password
+        password_confirmation: Password Confirmation
+        remember_created_at: Remember Created At
+        remember_me: Remember me?
+        reset_password_sent_at: Reset Password Sent At
+        reset_password_token: Reset Password Token
+        role: Role
+        sign_in_count: Sign In Count
+        unconfirmed_email: Unconfirmed Email
+        unlock_token: Unlock Token
+        updated_at: Updated At
+  website:
+    apartment:
+      amenities: "Amenities:"
+      location: "Location:"
+      number_of_bedrooms: "Number of bedrooms:"
+      title: Title
+      rent_amount: "Rent amount:"
+      image: Apartment image
+    booking:
+      in_rent_from: "Rented from "
+      tenant_message: "Tenant message:"
+      status: "Status:"
+    button:
+      back: Back
+      become_owner: Want to become a Host?
+      dispute_declaration: Declare a dispute
+      owner_mode: Host Mode
+      tenant_mode: Tenant Mode
+      to_accept: Accept
+      to_confirm: Confirm
+      to_destroy: Destroy
+      to_edit: Edit
+      to_cancel: Cancel
+      to_put_on_hold: Put on hold
+      to_rent: Rent
+      to_reject: Reject
+      to_view: View
+      view_disputes: View disputes
+    date:
+      from: "From "
+      at: "At "
+    dispute:
+      description: Dispute description
+      status: "Dispute status:"
+    listing:
+      no_disputes: No ongoing disputes.
+      no_results: No search results.
+      no_bookings: You have no booking requests at the moment.
+    models:
+      apartment: Apartment
+      booking: Booking
+      user: User
+    navbar:
+      apartments: Apartments
+      bookings: Bookings
+      account: My Account
+      logout: Logout
+    ownership_request:
+      status: "Status of your request : "
+    status:
+      accepted: Accepted
+      pending: Pending
+      rejected: Rejected
+    role:
+      admin: Administrator
+      owner: "Host:"
+      tenant: "Tenant:"
+    title:
+      add_apartment: Add an apartment
+      bookings_demands: Your booking requests
+      edit_apartment: "Edit the apartment "
+      dispute: "Dispute for the apartment "
+      dispute_declaration: Declare your dispute
+      owner_request: Your request to become an owner
+      rents_for: "Bookings for "
+      to_reserve: "Reserve "

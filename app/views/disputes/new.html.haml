@@ -1,7 +1,7 @@
 .apartment-card
   .card
     .card-header
-      .title.is-5 Déclaration de votre litige
+      .title.is-5= t('website.title.dispute_declaration')
 
     .container
       .card
@@ -11,10 +11,10 @@
 
             = f.hidden_field :booking_id, value: @booking.id
 
-            = f.input :description, autofocus: true, required: true, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('simple_form.labels.apartment.title') }
+            = f.input :description, autofocus: true, required: true, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('website.apartment.title') }
 
             = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
 
             .card-footer
-              = f.submit 'Enregistrer', class: 'button has-background-link-light'
-              = link_to t("activerecord.back"), :back, class: "button"
+              = f.submit t('website.button.to_confirm'), class: 'button has-background-link-light'
+              = link_to t("website.button.back"), :back, class: "button"

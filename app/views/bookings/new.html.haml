@@ -1,7 +1,7 @@
 .apartment-card
   .card
     .card-header
-      .title.is-5 Réserver #{@apartment.title}
+      .title.is-5= t('website.title.to_reserve') + @apartment.title
 
     .container
       .card-image
@@ -11,31 +11,32 @@
         .column
           .card-content
             .control
-              %strong Hôte : 
+              %strong= t('website.role.owner')
               = @apartment.owner.full_name_humanized
             .control
-              %strong Localisation : 
+              %strong= t('website.apartment.location')
               = @apartment.location
             .control
-              %strong Nombre de Chambres : 
+              %strong= t('website.apartment.number_of_bedrooms')
               = @apartment.number_of_bedrooms
             .control
-              %strong Commodités :
+              %strong= t('website.apartment.amenities')
               = @apartment.amenities
             .control
-              %strong Prix : 
+              %strong= t('website.apartment.rent_amount')
               = @apartment.formated_amount
 
         = simple_form_for @booking do |f|
           = f.hidden_field :apartment_id, value: @apartment.id
-          .column
-            %strong= f.label "Date de début :"
+          .date-fields
+            %strong= f.label t('website.date.from')
             = f.date_field  :start_date
-          .column
-            %strong= f.label "Date de fin :"
+
+            %strong= f.label t('website.date.at')
             = f.date_field  :end_date
+
           .column
             = f.input :message
           .card-footer
-            = f.submit 'Réserver', class: 'button has-background-link-light'
-            = link_to t("activerecord.back"), :back, class: "button"
+            = f.submit t('website.title.to_reserve'), class: 'button has-background-link-light'
+            = link_to t("website.button.back"), :back, class: "button"

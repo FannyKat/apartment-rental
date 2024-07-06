@@ -9,23 +9,23 @@
           - if @booking.apartment.image.attached? && @booking.apartment.image.variable?
             = image_tag @booking.apartment.image.variant(:medium)
         .control 
-          %strong Hôte :
+          %strong= t('website.role.owner')
           = @booking.apartment.owner.full_name_humanized
         .control 
-          %strong Prix :
+          %strong= t('website.apartment.rent_amount')
           = @booking.apartment.formated_amount
         .control
-          %strong Nombre de chambres :
+          %strong= t('website.apartment.number_of_bedrooms') 
           = @booking.apartment.number_of_bedrooms 
         .control
-          %strong  Localisation :
+          %strong= t('website.apartment.location')
           = @booking.apartment.location
         .control
-          %strong Commodités :
+          %strong= t('website.apartment.amenities')
           = @booking.apartment.amenities
     .card-footer 
-      %strong Loué du #{@booking.start_date.to_date} au #{@booking.end_date.to_date}
+      %strong= t('website.booking.in_rent_from') @booking.start_date.to_date t('website.date.at') @booking.end_date.to_date
     .dispute-btn
-      = link_to 'Déclarer un litige', new_dispute_path(booking_id: @booking.id), class: "button is-warning"
+      = link_to t('website.button_dispute_declaration'), new_dispute_path(booking_id: @booking.id), class: "button is-warning"
     .dispute-btn
-      = link_to 'Voir les litiges', disputes_path(booking_id: @booking.id), class: "button is-info"
+      = link_to t('website.button.view_disputes'), disputes_path(booking_id: @booking.id), class: "button is-info"

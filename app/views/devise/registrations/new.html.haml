@@ -8,22 +8,22 @@
 
         = f.input :avatar, as: :file, input_html: { class: "input" }
 
-        = f.input :email, autofocus: true, autocomplete: "email", input_html: { class: "input", placeholder: "Email" }
+        = f.input :email, autofocus: true, input_html: { class: "input", placeholder: "Email" }
         
-        = f.input :first_name, autocomplete: "first_name", input_html: { class: "input", placeholder: "Nom" }
+        = f.input :first_name, input_html: { class: "input", placeholder: t('simple_form.placeholder.first_name') }
         
-        = f.input :last_name, autocomplete: "last_name", input_html: { class: "input", placeholder: "Prénom" }
+        = f.input :last_name, input_html: { class: "input", placeholder: t('simple_form.placeholder.last_name') }
         
         - if @minimum_password_length
           %em= t('devise.shared.minimum_password_length', count: @minimum_password_length)
           %br/
-        = f.input :password, autocomplete: "new-password", input_html: { class: "input", placeholder: "Mot de passe" }
+        = f.input :password, autocomplete: "new-password", input_html: { class: "input", placeholder: t('simple_form.placeholder.password')  }
 
-        = f.input :password_confirmation, autocomplete: "new-password", input_html: { class: "input", placeholder: "Mot de passe" }
+        = f.input :password_confirmation, autocomplete: "new-password", input_html: { class: "input", placeholder: t('simple_form.placeholder.password_confirmation')  }
 
         .card-footer
           = f.submit t('devise.registrations.new.sign_up'), class: 'button has-background-link-light'
 
           = render "devise/shared/links"
  
-          = link_to t("activerecord.back"), :back, class: "button"
+          = link_to t("website.button.back"), :back, class: "button"

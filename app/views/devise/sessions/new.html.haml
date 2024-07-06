@@ -1,7 +1,7 @@
 .devise-card
   .card
     .card-content
-      .title.is-4 Bienvenu !
+      .title.is-4=t('devise.sessions.new.welcome')
 
       = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .field
@@ -19,9 +19,9 @@
 
         .field
           .control
-            = f.submit 'Se connecter', class: 'button has-background-link-light'
+            = f.submit t('devise.sessions.new.sign_in'), class: 'button has-background-link-light'
             
             = render "devise/shared/links"
             
-            = link_to t("activerecord.back"), :back, class: "button"
+            = link_to t("website.button.back"), :back, class: "button"
 
