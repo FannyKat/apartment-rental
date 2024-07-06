@@ -60,6 +60,7 @@ group :development, :test do
   gem 'annotate'
   gem 'rspec-rails'
   gem 'rspec-core'
+  gem 'rails-erd'
 end
 
 group :development do

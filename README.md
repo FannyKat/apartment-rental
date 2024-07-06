@@ -40,12 +40,18 @@ This application was built using Ruby on Rails and leverages the following gems:
 
 - **Devise**: User authentication and role management.
 - **Pundit**: Authorization policies and role-based access control.
-- **rails-18n**: Internationalization support.
+- **rails-i18n**: Internationalization support.
 - **rails_admin**: Admin interface to manage application data.
 - **image_processing**: Processing and uploading images.
 - **bulma-rails**: Bulma CSS framework.
 - **aasm**: State machine management
 - **Faker**: Generating fake data in the seeds file.
+
+## Schema ERD
+
+Entity-Relationship Diagram (ERD) representing the database structure of the Apartment Rental Application:
+
+![Schema ERD](https://github.com/FannyKat/apartment-rental/blob/main/public/erd.pdf)
 
 ## Ruby and Rails Versions
 
