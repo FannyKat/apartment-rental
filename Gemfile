@@ -24,12 +24,15 @@ gem "devise"
 
 gem "pundit"
 
+gem 'aasm'
+
 gem 'faker'
 
 # Translation i18n
 gem 'rails-i18n', '~> 7.0.0'
 
 gem 'rails_admin-i18n'
+
 gem 'rails_admin', github: 'railsadminteam/rails_admin', branch: 'master'
 
 # Front-End gems
@@ -43,8 +46,6 @@ gem "dartsass-rails", "~> 0.5.0"
 
 gem 'haml-rails'
 
-# gem "bcrypt", "~> 3.1.7"
-
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem "bootsnap", require: false
@@ -53,8 +54,6 @@ gem "bootsnap", require: false
 gem 'mini_magick'
 
 gem "image_processing", "~> 1.2"
-
-gem 'aasm'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
