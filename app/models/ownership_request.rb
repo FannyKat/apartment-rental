@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: ownership_requests
+#
+#  id         :bigint           not null, primary key
+#  tenant_id  :bigint           not null
+#  status     :string           default("pending"), not null
+#  email      :string           default(""), not null
+#  first_name :string           default(""), not null
+#  last_name  :string           default(""), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class OwnershipRequest < ApplicationRecord
   belongs_to :tenant, class_name: 'User'
 
