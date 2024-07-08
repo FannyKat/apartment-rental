@@ -6,22 +6,21 @@
     .container
       .card
         .card-content
-          = simple_form_for(@apartment, wrapper: :bulma_form) do |f|
+          = simple_form_for(@apartment) do |f|
             = render "devise/shared/error_messages", resource: @apartment
 
-            = f.input :title, autofocus: true, required: true, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('website.apartment.title') }
+            = f.input :title, autofocus: true, required: true, input_html: { class: 'input', placeholder: t('website.apartment.title') }
 
-            = f.input :rent_amount, required: true, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('website.apartment.rent_amount') }
+            = f.input :rent_amount, required: true, input_html: { class: 'input', placeholder: t('website.apartment.rent_amount') }
           
-            = f.input :location, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('website.apartment.location') }
+            = f.input :location, input_html: { class: 'input', placeholder: t('website.apartment.location') }
           
-            = f.input :number_of_bedrooms, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('website.apartment.number_of_bedrooms') }
+            = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: t('website.apartment.number_of_bedrooms') }
           
-            = f.input :amenities, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('website.apartment.amenities') }
+            = f.input :amenities, input_html: { class: 'input', placeholder: t('website.apartment.amenities') }
 
             = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
 
             .card-footer
               = f.submit t('website.button.to_confirm'), class: 'button has-background-link-light'
               = link_to t("website.button.back"), :back, class: "button"
-

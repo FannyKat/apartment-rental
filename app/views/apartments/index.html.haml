@@ -1,9 +1,8 @@
-- if policy(:user).tenant? || policy(:user).public?
+- if policy(:apartment).search? || policy(:user).public?
 
   = render "layouts/search_apartment" 
 
-- elsif policy(:user).owner? and OwnershipRequest.find_by(tenant_id: current_user.id).status == 'accepted'
-
+- elsif policy(:user).owner? 
   = link_to(new_apartment_path, class: "button has-background-link-light owner-create-btn is-rounded") do
     %i.fa-solid.fa-plus
 = render "apartments/listing"

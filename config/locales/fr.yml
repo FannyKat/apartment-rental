@@ -2,6 +2,12 @@ fr:
   activerecord:
     attributes:
       user:
+        amenities: Commodités
+        location: Localisation
+        number_of_bedrooms: Nombre de chambre
+        title: Titre
+        description: Description
+        rent_amount: Prix de la location
         become_owner: Devenir Hôte
         become_tenant: Devenir locataire
         confirmation_sent_at: Date d'envoi de la confirmation
@@ -13,6 +19,8 @@ fr:
         current_sign_in_ip: IP de la connexion actuelle
         email: Email
         encrypted_password: Mot de passe chiffré
+        first_name: Prénom
+        last_name: Nom
         failed_attempts: Tentatives échouées
         last_sign_in_at: Date de la dernière connexion
         last_sign_in_ip: IP de la dernière connexion
@@ -94,3 +102,8 @@ fr:
       owner_request: Votre demande pour devenir propriétaire
       rents_for: "Réservations pour "
       to_reserve: "Réserver "
+    search:
+      location: Localisation
+      min_price: Prix minimum
+      max_price: Prix maximum
+      number_of_bedrooms: Nombre de chambres

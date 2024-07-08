@@ -20,7 +20,7 @@ class ApartmentPolicy < ApplicationPolicy
   end
 
   def search?
-    true
+    user.present? and (user.tenant? || user.admin?)
   end
 
   def reserve?

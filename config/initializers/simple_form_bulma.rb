@@ -11,7 +11,8 @@ SimpleForm.setup do |config|
 
     b.wrapper tag: 'div', class: 'control' do |input|
       input.use :label, class: 'label'
-      input.use :input, class: 'input'
+      input.use :input, class: 'input', error_class: 'is-danger'
+
       input.use :error, wrap_with: { tag: 'p', class: 'help is-danger' }
       input.use :hint, wrap_with: { tag: 'p', class: 'help is-info' }
     end
@@ -24,4 +25,5 @@ SimpleForm.setup do |config|
   config.error_notification_tag = :div
 
   config.error_notification_class = 'error_notification'
+
 end

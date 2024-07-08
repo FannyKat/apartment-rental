@@ -2,17 +2,24 @@
   - if @apartments.any?
     - @apartments.each do |apartment|
       .card
-        .card-header-title
-          %i.fa-solid.fa-house
-          = apartment.title
+        .card-image
+          %figure.image.is-4by3
+            - if apartment.image.attached? && apartment.image.variable?
+              = link_to image_tag(apartment.image.variant(:medium)), new_booking_path(apartment_id: apartment.id)
         .card-content
+          .media
+            .media-left
+              .image.is-48x48
+                - if apartment.owner.avatar.persisted?
+                  = image_tag apartment.owner.avatar, class: "is-rounded"
+                - else
+                  = image_tag "missing.png", class: "is-rounded"
+            .media-content
+              .title.is-5
+                %i.fa-solid.fa-house 
+                = apartment.title
+              .subtitle.is-6= apartment.owner.full_name_humanized
           .content
-            .card-image
-              - if apartment.image.attached? && apartment.image.variable?
-                = image_tag apartment.image.variant(:medium)
-            %div
-              %strong= t('website.role.owner')
-              = apartment.owner.full_name_humanized
             %div 
               %strong= t('website.apartment.rent_amount')
               = apartment.formated_amount

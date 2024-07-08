@@ -1,4 +1,4 @@
-%nav.navbar.has-background-link-light{role: "navigation", aria: {label: "main navigation"}}
+%nav.navbar.has-background-link-light.has-shadow{role: "navigation", aria: {label: "main navigation"}}
   .navbar-brand
     %a.navbar-title.navbar-item{href: "/"} 
       AppartRent
@@ -10,12 +10,9 @@
       
   #navbarApartmentRental.navbar-menu
     .navbar-start
-      - if I18n.locale == :fr
-        = link_to(url_for(locale: :en), class: 'navbar-item') do
-          %i.fa-solid.fa-globe
-      - else
-        = link_to(url_for(locale: :fr), class: 'navbar-item') do
-          %i.fa-solid.fa-globe
+      - target_locale = I18n.locale == :fr ? :en : :fr
+      = link_to(url_for(locale: target_locale), class: 'navbar-item') do
+        %i.fa-solid.fa-globe
 
       - if current_user
         %a.navbar-item
@@ -23,6 +20,8 @@
             = button_to t('website.button.tenant_mode'), switch_role_path, method: :patch, class: 'navbar-item'
           - elsif current_user.tenant?
             = button_to t('website.button.owner_mode'), switch_role_path, method: :patch, class: 'navbar-item'
+      = link_to t('website.navbar.apartments'), apartments_path, class: 'navbar-item'
+
 
     - if current_user
       .navbar-end
@@ -33,13 +32,17 @@
                 = image_tag current_user.avatar, class: "is-rounded"
               - else
                 = image_tag 'missing.png', class: "is-rounded"
+
             #navbar-username= current_user.full_name_humanized
           .navbar-dropdown.is-right
             = link_to t('website.navbar.apartments'), apartments_path, class: 'navbar-item'
+            
             - if policy(:user).admin_dashboard?
               = link_to 'Administration', rails_admin_path, class: 'navbar-item'
+
             - elsif policy(:user).owner? || policy(:user).tenant?
               = link_to t('website.navbar.bookings'), bookings_path, class: 'navbar-item'
+
             = link_to t('website.navbar.account'), edit_user_registration_path, class: 'navbar-item'
 
             %hr.navbar-divider
@@ -47,24 +50,8 @@
     - else
       .navbar-end
         .navbar-item.has-dropdown.is-hoverable
-          .navbar-link
+          .navbar-link.mobile-connexion-link
             .image.is-32x32
               = image_tag 'missing.png', class: "is-rounded"
           .navbar-dropdown.is-right
             = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'navbar-item'
-
-:javascript
-  document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-    $navbarBurgers.forEach( el => {
-      el.addEventListener('click', () => {
-
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
-
-        el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-      });
-    });
-  });

@@ -7,7 +7,8 @@
       .card-image
         %figure.image.is-4by3
           - if @apartment.image.attached?
-            = image_tag @apartment.image.variant(:medium)
+            = image_tag(@apartment.image.variant(:medium), id: "modal-image", data: { target: 'modal-image-trigger', src: url_for(@apartment.image) })
+
         .column
           .card-content
             .control

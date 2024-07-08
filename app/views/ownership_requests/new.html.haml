@@ -6,13 +6,13 @@
       = simple_form_for(@ownership_request, url: ownership_requests_path, wrapper: :bulma_form) do |f|
         = f.hidden_field :tenant_id, value: current_user.id
         
-        = f.input :email, autofocus: true, required: true, hint: "Please enter your email address.", input_html: { class: 'input', placeholder: 'Email' }
+        = f.input :email, autofocus: true, required: true, input_html: { class: 'input', value: "#{current_user.email}" }
 
-        = f.input :first_name, required: true, hint: "Please enter your first name.", input_html: { class: 'input' , value: "#{current_user.first_name}"}
+        = f.input :first_name, required: true, input_html: { class: 'input' , value: "#{current_user.first_name}"}
         
-        = f.input :last_name, required: true, hint: "Please enter your last name.", input_html: { class: 'input' , value: "#{current_user.last_name}" }
+        = f.input :last_name, required: true, input_html: { class: 'input' , value: "#{current_user.last_name}" }
 
-        = f.input :cin, as: :file
+        = f.input :cin, as: :file, required: true
 
         .card-footer
           = f.submit t('website.button.to_confirm'), class: "button is-primary"

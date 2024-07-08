@@ -94,3 +94,8 @@ en:
       owner_request: Your request to become an owner
       rents_for: "Bookings for "
       to_reserve: "Reserve "
+    search:
+      location: Location
+      min_price: Minimum price
+      max_price: Maximum price
+      number_of_bedrooms: Number of bedrooms

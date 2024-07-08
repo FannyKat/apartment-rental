@@ -11,7 +11,7 @@
 
             = f.hidden_field :booking_id, value: @booking.id
 
-            = f.input :description, autofocus: true, required: true, hint: t('simple_form.input.required'), input_html: { class: 'input', placeholder: t('website.apartment.title') }
+            = f.input :description, autofocus: true, required: true, input_html: { class: 'input', placeholder: t('website.apartment.title') }
 
             = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
 
