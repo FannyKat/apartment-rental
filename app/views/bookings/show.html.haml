@@ -1,31 +1,53 @@
 
-.apartment-card
+.is-flex.is-justify-content-space-around.mt-6
   .card
-    .card-header
-      .title.is-4= @booking.apartment.title
-    .card-content
+    .card-image
+      %figure.image.is-4by3
+        - if @booking.apartment.image.attached? && @booking.apartment.image.variable?
+          = image_tag @booking.apartment.image.variant(:medium)
+        - else 
+          = image_tag "missing.png"
+
+      .card-content.m-5
+        .media
+          .media-left 
+            .image.is-48x48
+              - if @booking.apartment.owner.avatar.persisted?
+                = image_tag @booking.apartment.owner.avatar, class: "is-rounded"
+              - else
+                = image_tag "missing.png", class: "is-rounded"
+          .media-content
+            .title.is-6
+              %i.fa-solid.fa-house 
+              = @booking.apartment.title
+            .subtitle.is-6.has-text-grey
+              = t('website.role.owner') + @booking.apartment.owner.full_name_humanized
+
+          .columns.is-gap-2
+            .col
+              %strong.mr-1= t('website.booking.in_rent_from') 
+              =@booking.start_date.to_date 
+            .col
+              %strong.mr-1=t('website.date.at')
+              =@booking.end_date.to_date
+
       .content
-        .card-image
-          - if @booking.apartment.image.attached? && @booking.apartment.image.variable?
-            = image_tag @booking.apartment.image.variant(:medium)
-        .control 
-          %strong= t('website.role.owner')
-          = @booking.apartment.owner.full_name_humanized
-        .control 
-          %strong= t('website.apartment.rent_amount')
-          = @booking.apartment.formated_amount
-        .control
-          %strong= t('website.apartment.number_of_bedrooms') 
-          = @booking.apartment.number_of_bedrooms 
-        .control
-          %strong= t('website.apartment.location')
-          = @booking.apartment.location
-        .control
-          %strong= t('website.apartment.amenities')
-          = @booking.apartment.amenities
+        .m-4
+          %strong= @booking.apartment.location
+        .rows.m-5
+          .row.mb-2
+            %strong= t('website.apartment.rent_amount')
+            = @booking.apartment.formated_amount
+          .row.mb-2
+            %strong= t('website.apartment.number_of_bedrooms') 
+            = @booking.apartment.number_of_bedrooms 
+          .row.mb-2
+            %strong= t('website.apartment.amenities')
+            = @booking.apartment.amenities
+          
     .card-footer 
-      %strong= t('website.booking.in_rent_from') @booking.start_date.to_date t('website.date.at') @booking.end_date.to_date
-    .dispute-btn
-      = link_to t('website.button_dispute_declaration'), new_dispute_path(booking_id: @booking.id), class: "button is-warning"
-    .dispute-btn
-      = link_to t('website.button.view_disputes'), disputes_path(booking_id: @booking.id), class: "button is-info"
+      .card-footer-item
+        = link_to t('website.button.dispute_declaration'), new_dispute_path(booking_id: @booking.id), class: "button is-warning"
+      
+      .card-footer-item
+        = link_to t('website.button.view_disputes'), disputes_path(booking_id: @booking.id), class: "button is-info"

@@ -1,26 +1,33 @@
-.apartment-card
+.is-flex.is-justify-content-space-around.mt-6
   .card
-    .card-header-title
-      %i.fa-solid.fa-house
-      = apartment.title
-    .card-content
-      .content
-        .card-image
-          - if @apartment.image.attached? && @apartment.image.variable?
-            = image_tag(@apartment.image.variant(:medium), id: "modal-image", data: { target: 'modal-image-trigger', src: url_for(@apartment.image) })
+    .card-image
+      %figure.image.is-4by3
+        - if @apartment.image.attached? && @apartment.image.variable?
+          = image_tag(@apartment.image.variant(:medium), id: "modal-image", data: { target: 'modal-image-trigger', src: url_for(@apartment.image) })
+        - else 
+          = image_tag "missing.png"
 
-        .control 
-          %strong= t('website.role.owner')
-          = @apartment.owner.full_name_humanized
-        .control 
-          %strong= t('website.apartment.rent_amount')
-          = @apartment.formated_amount
-        .control
-          %strong= t('website.apartment.number_of_bedrooms')
-          = @apartment.number_of_bedrooms 
-        .control
-          %strong= t('website.apartment.location')
-          = @apartment.location
-        .control
-          %strong= t('website.apartment.amenities')
-          = @apartment.amenities
+    .card-content.m-5
+      .title.is-5
+        %i.fa-solid.fa-house
+        = @apartment.title
+
+      .content
+        .m-4
+          %strong= @apartment.location
+
+        .rows.m-5
+          .row.mb-2
+            %strong= t('website.role.owner')
+            = @apartment.owner.full_name_humanized
+          .row.mb-2
+            %strong= t('website.apartment.rent_amount')
+            = @apartment.formated_amount
+          .row.mb-2
+            %strong= t('website.apartment.number_of_bedrooms')
+            = @apartment.number_of_bedrooms 
+          .row.mb-2
+            %strong= t('website.apartment.amenities')
+            = @apartment.amenities
+      .card-footer-item
+        = link_to t("website.button.back"), :back, class: "button"

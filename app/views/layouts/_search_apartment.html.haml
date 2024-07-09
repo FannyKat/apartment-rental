@@ -1,4 +1,4 @@
-.search-bar
+.search-bar.mt-6.is-flex.is-justify-content-center.is-align-items-center
   = form_tag(search_apartments_path, method: :get, class: "search-form") do
     = text_field_tag :location, params[:location], placeholder: t('website.search.location'), class: 'input'
     = number_field_tag :min_rent, params[:min_rent], placeholder: t('website.search.min_price'), class: 'input'

@@ -1,6 +1,6 @@
-.devise-card
+.is-flex.is-justify-content-space-around.mt-6
   .card
-    .card-content
+    .card-content.m-5
       .title.is-4=t('devise.sessions.new.welcome')
 
       = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|

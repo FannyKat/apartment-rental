@@ -1,5 +1,5 @@
+document.addEventListener('turbo:load', function() {
 
-document.addEventListener('DOMContentLoaded', function() {
   const baseUrl = "http://localhost:3000"
 
   // Retrieve source image to open it in the modal
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Close Image Modal on click
   (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach((close) => {
-   
+    
     const modalClosest = close.closest('.modal');
 
     close.addEventListener('click', () => {
@@ -47,4 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.dispatchEvent(new Event('turbo:load'));
 });

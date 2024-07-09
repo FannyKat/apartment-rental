@@ -4,7 +4,7 @@ class ApartmentPolicy < ApplicationPolicy
   end
 
   def show?
-    user.tenant? || user.owner? || user.admin?
+    user.present? and (user.tenant? || user.owner? || user.admin?)
   end
 
   def create?
@@ -21,18 +21,6 @@ class ApartmentPolicy < ApplicationPolicy
 
   def search?
     user.present? and (user.tenant? || user.admin?)
-  end
-
-  def reserve?
-    user.tenant?
-  end
-
-  def accept_reservation?
-    user.owner?
-  end
-
-  def reject_reservation?
-    user.owner?
   end
 
   class Scope < Scope

@@ -1,19 +1,22 @@
 - if policy(:user).owner?
   .card-footer
-    = link_to t('website.button.to_edit'), edit_apartment_path(apartment.id), class: "button is-info is-light"
-    = button_to t('website.button.to_cancel'), apartment_path(apartment.id), method: :delete, class: "button is-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, input_html:{'data-confirm': 'Are you sure you want to delete this?'}
+    .card-footer-item
+      = link_to t('website.button.to_edit'), edit_apartment_path(apartment.id), class: "button is-info is-light"
+    
+    .card-footer-item
+      = button_to t('website.button.to_cancel'), apartment_path(apartment.id), method: :delete, class: "button is-danger", form: { data: { turbo_confirm: 'Are you sure?' } }, input_html:{'data-confirm': 'Are you sure you want to delete this?'}
 
-%script(type="module")
-  :plain
-    document.addEventListener('DOMContentLoaded', () => {
-      const confirmHandler = (event) => {
-        const message = event.target.getAttribute('data-confirm');
-        if (!confirm(message)) {
-          event.preventDefault();
-        }
-      };
+  %script(type="module")
+    :plain
+      document.addEventListener('DOMContentLoaded', () => {
+        const confirmHandler = (event) => {
+          const message = event.target.getAttribute('data-confirm');
+          if (!confirm(message)) {
+            event.preventDefault();
+          }
+        };
 
-      document.querySelectorAll('[data-confirm]').forEach((element) => {
-        element.addEventListener('click', confirmHandler);
+        document.querySelectorAll('[data-confirm]').forEach((element) => {
+          element.addEventListener('click', confirmHandler);
+        });
       });
-    });

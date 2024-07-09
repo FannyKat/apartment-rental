@@ -1,6 +1,7 @@
 class BookingPolicy < ApplicationPolicy
+
   def create?
-    user.tenant?
+    !user.present? or user.tenant?
   end
 
   def booking?
@@ -19,9 +20,7 @@ class BookingPolicy < ApplicationPolicy
     user.tenant?
   end
 
-  def manage_booking?
-    user.owner?
-  end
+  # Only owners can accept/reject bookings
 
   def accepted?
     user.owner?

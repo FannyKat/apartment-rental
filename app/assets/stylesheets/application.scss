@@ -1,16 +1,12 @@
 @use "bulma";
+
 @import "mobile.scss";
-
-// Titles
-
-.title {
-  align-items: center;
-}
 
 // Navbar
 
-.navbar-title {
-  font-size: 1.5rem;
+.brand-logo {
+  font-size: 1.2rem;
+  color: #80F;
 }
 
 .navbar-dropdown, 
@@ -18,22 +14,51 @@
   font-size: 1.1rem;
 }
 
-#navbar-username {
-  margin-left: 0.5rem;
+.navbar-item {
+  color: hsl(0, 0%, 48%);
+
+  &:hover {
+    color: hsl(0, 0%, 21%);
+  }
 }
 
-// Buttons
+// Search
 
-.become-owner-btn {
-  margin: 1rem;
+.search-bar .search-form {
+  display: flex;
+  gap: 1rem;
+  max-width: 56rem;
 }
 
-.owner-create-btn {
-  margin: 1rem;
+// Modals
+
+.image-modal {
+  display: none;
 }
 
-.dispute-btn {
-  margin: 1rem;
+figure:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+// Inputs/Texts
+
+.notification {
+  color: white;
+}
+
+textarea {
+  resize: none;
+  overflow-y: auto scroll; 
+
+  input {
+    height: auto;
+  }
+}
+
+#error_explanation {
+  color: red;
 }
 
 // Cards
@@ -50,92 +75,4 @@
       margin: 10px;
       width: 20%;
     }
-}
-
-.card-footer {
-  gap: 1rem;
-  margin: 1rem;
-  padding: 1rem;
-  justify-content: center;
-}
-
-.card-header {
-  justify-content: space-around;
-}
-
-.card-header-title {
-  justify-content: space-evenly;
-  flex-direction: column;
-}
-
-// Search
-
-.search-bar {
-  margin: 5rem;
-}
-
-.apartment-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 3rem;
-}
-
-.devise-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5rem;
-}
-
-// SearchBar
-
-.search-bar {
-  .search-form {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .input {
-    flex: 1;
-  }
-}
-
-.notification {
-  color: white;
-}
-
-.date-fields {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-textarea {
-  resize: none;
-  overflow-y: auto scroll; 
-
-  input {
-    height: auto;
-  }
-}
-
-#error_explanation {
-  color: red;
-}
-
-.ownership-request {
-  display: flex;
-  align-items: center;
-
-  #status {
-   color: var(--bulma-link);
-   font-weight: bold;
-  }
-}
-
-// Modals
-
-.image-modal {
-  display: none;
 }

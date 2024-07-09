@@ -30,16 +30,18 @@ en:
         updated_at: Updated At
   website:
     apartment:
-      amenities: "Amenities:"
-      location: "Location:"
-      number_of_bedrooms: "Number of bedrooms:"
+      amenities: "Amenities : "
+      location: "Location : "
+      number_of_bedrooms: "Number of bedrooms : "
       title: Title
-      rent_amount: "Rent amount:"
+      rent_amount: "Rent amount : "
       image: Apartment image
+      rooms: " Rooms"
     booking:
       in_rent_from: "Rented from "
-      tenant_message: "Tenant message:"
-      status: "Status:"
+      in_rent_at: "Rented at "
+      tenant_message: "Tenant message : "
+      status: "Status : "
     button:
       back: Back
       become_owner: Want to become a Host?
@@ -58,10 +60,10 @@ en:
       view_disputes: View disputes
     date:
       from: "From "
-      at: "At "
+      at: "at "
     dispute:
       description: Dispute description
-      status: "Dispute status:"
+      status: "Dispute status : "
     listing:
       no_disputes: No ongoing disputes.
       no_results: No search results.
@@ -83,10 +85,10 @@ en:
       rejected: Rejected
     role:
       admin: Administrator
-      owner: "Host:"
-      tenant: "Tenant:"
+      owner: "Host : "
+      tenant: "Tenant : "
     title:
-      add_apartment: Add an apartment
+      add_apartment: Describe your apartment
       bookings_demands: Your booking requests
       edit_apartment: "Edit the apartment "
       dispute: "Dispute for the apartment "

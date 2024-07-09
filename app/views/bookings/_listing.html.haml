@@ -1,53 +1,60 @@
-.listing
+.listing 
   - if @bookings.any?
     - @bookings.each do |booking|
       .card
-        .card-header
-          .card-header-title= t('website.title.rents_for') + booking.apartment.title
-
-        .card-content
-          .content
-            .card-image
-              - if booking.apartment.image.attached?
-                = image_tag booking.apartment.image.variant(:medium)
-            .control 
-              %strong= t('website.role.tenant')
-              = booking.tenant.full_name_humanized
-            .control
-              %strong= t('activerecord.attributes.user.email')
-              = booking.tenant.email
-            .control 
-              %strong= t('website.apartment.localisation')
-              = booking.apartment.location
-            .control 
-              %strong= t('website.apartment.rent_amount')
-              = booking.apartment.formated_amount
-            .control 
-              %strong= t('website.apartment.number_of_bedrooms')
-              = booking.apartment.number_of_bedrooms
+        .card-image
+          %figure.image.is-4by3
+            - if booking.apartment.image.attached?
+              = image_tag booking.apartment.image.variant(:medium)
+            - else
+              = image_tag "missing.png"
               
-            .control 
-              %strong= t('website.date.from')
-              = booking.start_date.to_date
-            .control 
-              %strong= t('website.date.at')
-              = booking.end_date.to_date
-            .control 
-              %strong= t('website.booking.tenant_message')
-              = booking.message
-            .control 
-              %strong= t('website.booking.status')
-              = booking.status
+        .card-content
+          = render "layouts/card_media", booking: booking, apartment: booking.apartment
+
+          .content
+            .m-4
+              %strong= booking.apartment.location
+            
+            .rows.m-5
+              .row.mb-2 
+                %strong= t('website.apartment.rent_amount')
+                = booking.apartment.formated_amount
+
+              .row.mb-2
+                %strong= t('website.apartment.number_of_bedrooms')
+                = booking.apartment.number_of_bedrooms
+
+              .row.mb-2
+                %strong= t('website.date.from')
+                = booking.start_date.to_date
+
+              .row.mb-2 
+                %strong= t('website.date.at')
+                = booking.end_date.to_date
+
+              .row.mb-2 
+                %strong= t('website.booking.tenant_message')
+                = booking.message
+
+              .row.mb-2 
+                %strong= t('website.booking.status')
+                = booking.status
 
         .card-footer
-          - if policy(:booking).manage_booking?
+          - if policy(:user).owner?
             - if booking.accepted?
-              = link_to t('website.button.to_view'), booking_path(booking), class: "button is-warning"
-            = button_to t('website.button.to_accept'), accepted_booking_path(booking), method: :patch, class: "button is-success" if booking.may_accepted?
-            = button_to t('website.button.to_reject'), rejected_booking_path(booking), method: :patch, class: "button is-danger" if booking.may_rejected?
-            = button_to t('website.button.to_put_on_hold'), pending_booking_path(booking), method: :patch, class: "button has-background-link-light" if booking.may_pending?
+              .card-footer-item
+                = link_to t('website.button.to_view'), booking_path(booking), class: "button is-warning"
+            .card-footer-item
+              = button_to t('website.button.to_accept'), accepted_booking_path(booking), method: :patch, class: "button is-success", disabled: !booking.may_accepted?
+            .card-footer-item
+              = button_to t('website.button.to_reject'), rejected_booking_path(booking), method: :patch, class: "button is-danger", disabled: !booking.may_rejected?
+            .card-footer-item
+              = button_to t('website.button.to_put_on_hold'), pending_booking_path(booking), method: :patch, class: "button has-background-link-light", disabled: !booking.may_pending?
           - else
             - if policy(booking).destroy?
-              = button_to t('website.button.to_cancel'), booking_path(booking.id), method: :delete, class: "button is-light"
+              .card-footer-item
+                = button_to t('website.button.to_cancel'), booking_path(booking.id), method: :delete, class: "button is-light"
   - else
     %p= t('website.listing.no_bookings')

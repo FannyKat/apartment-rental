@@ -1,43 +1,44 @@
-.apartment-card
+.is-flex.is-justify-content-space-around.mt-6
   .card
-    .card-header
-      .title.is-5= t('website.title.to_reserve') + @apartment.title
+    .card-image
+      %figure.image.is-4by3
+        - if @apartment.image.attached?
+          = image_tag(@apartment.image.variant(:medium), id: "modal-image", data: { target: 'modal-image-trigger', src: url_for(@apartment.image) })
+        - else
+          = image_tag "missing.png"
+          
+    .card-content.m-5
+      = render "layouts/card_media", booking: @booking, apartment: @apartment
+      
+      .content
+        .m-4
+          %strong= @apartment.location
+        .rows.m-5
+          .row.mb-2
+            %strong= t('website.apartment.number_of_bedrooms')
+            = @apartment.number_of_bedrooms
+          .row.mb-2
+            %strong= t('website.apartment.amenities')
+            = @apartment.amenities
+          .row.mb-2
+            %strong= t('website.apartment.rent_amount')
+            = @apartment.formated_amount
 
-    .container
-      .card-image
-        %figure.image.is-4by3
-          - if @apartment.image.attached?
-            = image_tag(@apartment.image.variant(:medium), id: "modal-image", data: { target: 'modal-image-trigger', src: url_for(@apartment.image) })
-
-        .column
-          .card-content
-            .control
-              %strong= t('website.role.owner')
-              = @apartment.owner.full_name_humanized
-            .control
-              %strong= t('website.apartment.location')
-              = @apartment.location
-            .control
-              %strong= t('website.apartment.number_of_bedrooms')
-              = @apartment.number_of_bedrooms
-            .control
-              %strong= t('website.apartment.amenities')
-              = @apartment.amenities
-            .control
-              %strong= t('website.apartment.rent_amount')
-              = @apartment.formated_amount
-
-        = simple_form_for @booking do |f|
-          = f.hidden_field :apartment_id, value: @apartment.id
-          .date-fields
+      = simple_form_for @booking do |f|
+        = f.hidden_field :apartment_id, value: @apartment.id
+        .columns
+          .column
             %strong= f.label t('website.date.from')
             = f.date_field  :start_date
 
+          .column
             %strong= f.label t('website.date.at')
             = f.date_field  :end_date
 
-          .column
-            = f.input :message
-          .card-footer
+        .column
+          = f.input :message
+        .card-footer
+          .card-footer-item
             = f.submit t('website.title.to_reserve'), class: 'button has-background-link-light'
+          .card-footer-item
             = link_to t("website.button.back"), :back, class: "button"

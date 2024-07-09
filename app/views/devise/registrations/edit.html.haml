@@ -1,9 +1,9 @@
-.devise-card
+.is-flex.is-justify-content-space-around.m-6
   .card
     .card-header
-      .card-header-title= t('website.navbar.account')
+      .title.is-5.m-4= t('website.navbar.account')
 
-    .card-content
+    .card-content.m-5
       .media
         .media-left
           %figure.image.is-96x96
@@ -15,12 +15,12 @@
         .media-content
           %p.title.is-3
             = current_user.full_name_humanized
-          .ownership-request
+          .columns.m-2
             = t('website.ownership_request.status')
-            #status
+            %strong.ml-2
               = OwnershipRequest.is_requested?(current_user) 
 
-          = link_to t('website.button.become_owner'), new_ownership_request_path, class:"button has-background-link-light become-owner-btn"
+          .m-4= link_to t('website.button.become_owner'), new_ownership_request_path, class:"button has-background-link-light become-owner-btn"
 
 
       = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
@@ -45,8 +45,9 @@
         %i= t("devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes")
         
         .card-footer
-          = f.submit t("devise.registrations.edit.update"), class: "button has-background-link-light"
+          .card-footer-item
+            = f.submit t("devise.registrations.edit.update"), class: "button has-background-link-light"
 
           //= button_to t("devise.registrations.edit.cancel_my_account"), registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "button is-danger"
-
-          = link_to t("website.button.back"), :back, class: "button"
+          .card-footer-item
+            = link_to t("website.button.back"), :back, class: "button"

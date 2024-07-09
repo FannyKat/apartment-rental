@@ -38,16 +38,18 @@ fr:
         updated_at: Date de mise à jour
   website:
     apartment:
-      amenities: "Commodités :"
-      location: "Localisation :"
-      number_of_bedrooms: "Nombre de chambres :"
+      amenities: "Commodités : "
+      location: "Localisation : "
+      number_of_bedrooms: "Nombre de chambres : "
       title: Titre
-      rent_amount: "Prix du loyer :"
+      rent_amount: "Prix du loyer : "
       image: Image de l'appartement
+      rooms: " Chambres"
     booking:
       in_rent_from: "Loué du "
-      tenant_message: "Message du locataire :"
-      status: "Statut :"
+      in_rent_at: "Loué au "
+      tenant_message: "Message du locataire : "
+      status: "Statut : "
     button:
       back: Retour
       become_owner: Vous voulez devenir Hôte ?
@@ -66,10 +68,10 @@ fr:
       view_disputes: Voir les litiges
     date:
       from: "Du "
-      at: "Au "
+      at: "au "
     dispute:
       description: Description du litige
-      status: "Statut du litige :"
+      status: "Statut du litige : "
     listing:
       no_disputes: Pas de litiges en cours.
       no_results: Aucun résultats de recherche.
@@ -91,10 +93,10 @@ fr:
       rejected: Rejetée
     role:
       admin: Administrateur
-      owner: "Hôte :"
-      tenant: "Locataire :"
+      owner: "Hôte : "
+      tenant: "Locataire : "
     title:
-      add_apartment: Ajouter un logement
+      add_apartment: Décrivez votre logement
       bookings_demands: Vos demandes de réservations
       edit_apartment: "Modifier le logement "
       dispute: "Litige pour le logement "

@@ -1,6 +1,6 @@
-.devise-card
+.is-flex.is-justify-content-space-around.mt-6
   .card
-    .card-content
+    .card-content.m-5
       .title.is-4=t('devise.registrations.new.sign_up')
 
       = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
@@ -17,13 +17,14 @@
         - if @minimum_password_length
           %em= t('devise.shared.minimum_password_length', count: @minimum_password_length)
           %br/
-        = f.input :password, autocomplete: "new-password", input_html: { class: "input", placeholder: t('simple_form.placeholder.password')  }
+        = f.input :password, input_html: { class: "input", placeholder: t('simple_form.placeholder.password')  }
 
-        = f.input :password_confirmation, autocomplete: "new-password", input_html: { class: "input", placeholder: t('simple_form.placeholder.password_confirmation')  }
+        = f.input :password_confirmation, input_html: { class: "input", placeholder: t('simple_form.placeholder.password_confirmation')  }
 
         .card-footer
-          = f.submit t('devise.registrations.new.sign_up'), class: 'button has-background-link-light'
-
-          = render "devise/shared/links"
- 
-          = link_to t("website.button.back"), :back, class: "button"
+          .card-footer-item
+            = f.submit t('devise.registrations.new.sign_up'), class: 'button has-background-link-light'
+          .card-footer-item
+            = render "devise/shared/links"
+          .card-footer-item
+            = link_to t("website.button.back"), :back, class: "button"

@@ -27,6 +27,8 @@
               = dispute.status
 
         .card-footer
-          = link_to t("website.button.back"), :back, class: "button"
+          .card-footer-item
+            = link_to t("website.button.back"), :back, class: "button"
   - else
     = t('website.listing.no_disputes')
+    = link_to t("website.button.back"), :back, class: "button"

@@ -1,21 +1,26 @@
-.apartment-card
+.is-flex.is-justify-content-space-around.mt-6
   .card
-    .card-header
-      .title.is-5= t('website.title.dispute') @booking.apartment.title
+    .card-image
+      %figure.image.is-4by3
+        - if @dispute.image.attached?
+          = image_tag @dispute.image
+        - else 
+          = image_tag "missing.png"
+          
+    .card-content.m-5
+      .title.is-5= t('website.title.dispute') + @booking.apartment.title
+      
+      .content.rows.m-5
+        .row.mb-2
+          %strong= t('website.dispute.description')
+          = @dispute.description
+        .row.mb-2
+          %strong= t('website.dispute.status')
+          = @dispute.status
+        .row.mb-2
+          %strong= t('website.role.tenant')
+          = @booking.tenant.full_name_humanized
 
-    .container
-      .card
-        .card-content
-          .control
-            %strong= t('website.dispute.description')
-            = @dispute.description
-          .control
-            %strong= t('website.dispute.status')
-            = @dispute.status
-          .control
-            %strong= t('website.role.tenant')
-            = @booking.tenant.full_name_humanized
-
-            = @dispute.image if @dispute.image.attached?
-          .card-footer
+        .card-footer
+          .card-footer-item
             = link_to t("website.button.back"), :back, class: "button"

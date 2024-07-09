@@ -5,7 +5,8 @@
         .card-image
           %figure.image.is-4by3
             - if apartment.image.attached? && apartment.image.variable?
-              = link_to image_tag(apartment.image.variant(:medium)), new_booking_path(apartment_id: apartment.id)
+              = link_to image_tag(apartment.image.variant(:medium)), new_booking_path(apartment_id: apartment.id) if policy(:booking).new?
+              = link_to image_tag(apartment.image.variant(:medium)), apartment_path(apartment: apartment, id: apartment.id) if policy(:apartment).show?
         .card-content
           .media
             .media-left
@@ -15,24 +16,15 @@
                 - else
                   = image_tag "missing.png", class: "is-rounded"
             .media-content
-              .title.is-5
+              .title.is-6.mb-2
                 %i.fa-solid.fa-house 
                 = apartment.title
-              .subtitle.is-6= apartment.owner.full_name_humanized
+              .subtitle.is-6.has-text-grey
+                = t('website.role.owner') + apartment.owner.full_name_humanized
           .content
-            %div 
-              %strong= t('website.apartment.rent_amount')
-              = apartment.formated_amount
-            %div
-              %strong= t('website.apartment.number_of_bedrooms')
-              = apartment.number_of_bedrooms 
-            %div
-              %strong= t('website.apartment.localisation')
-              = apartment.location
-            %div
-              %strong= t('website.apartment.amenities')
-              = apartment.amenities
-        = render partial: 'apartments/card_actions', locals: { apartment: apartment }
+            .m-4
+              %strong= apartment.location
+            = render 'apartments/card_actions', apartment: apartment
       
   - else
     %p=t('website.listing.no_results')

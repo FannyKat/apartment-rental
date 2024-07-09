@@ -1,0 +1,26 @@
+.media
+  .media-left
+    .image.is-48x48
+      - if current_user.owner? and booking.tenant.avatar.persisted?
+        = image_tag booking.tenant.avatar, class: "is-rounded"
+
+      - elsif current_user.tenant? and apartment.owner.avatar.persisted?
+        = image_tag apartment.owner.avatar, class: "is-rounded"
+
+      - else
+        = image_tag "missing.png", class: "is-rounded"
+
+  .media-content
+    .title.is-6.mb-2
+      %i.fa-solid.fa-house 
+      = apartment.title
+    .subtitle.is-6.has-text-grey
+      - if current_user.owner? 
+        = t('website.role.tenant') + booking.tenant.full_name_humanized
+
+        .subtitle.is-6.has-text-grey
+          = booking.tenant.email
+      - else
+        = t('website.role.owner') + apartment.owner.full_name_humanized
+        .subtitle.is-6.has-text-grey
+          = apartment.owner.email
