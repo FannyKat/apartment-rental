@@ -1,0 +1,19 @@
+.card-image
+  %figure.image.is-4by3
+    - if apartment.image.attached? && apartment.image.variable?
+      = image_tag(apartment.image.variant(:medium), id: "modal-image", data: { target: 'modal-image-trigger', src: url_for(apartment.image) })
+    - else
+      = image_tag "missing.png"
+  
+  - if apartment.images.attached?
+    .carousel-container
+      .carousel-images
+        - (0...apartment.images.count).each do |image, index|
+          .carousel-item{class: index == 0 ? 'is-active' : ''}
+            = image_tag(apartment.resized_image(apartment.images[image]), id: "modal-image", data: { target: 'modal-image-trigger', src: url_for(apartment.images[image]) })
+     
+      .carousel-controls 
+        %button.button#prev
+          %i.fa-solid.fa-less-than
+        %button.button#next
+          %i.fa-solid.fa-greater-than

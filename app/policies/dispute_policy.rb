@@ -1,7 +1,7 @@
 class DisputePolicy < ApplicationPolicy
 
   def create?
-    user.owner?
+    user.owner? || user.tenant?
   end
 
 end

@@ -4,32 +4,20 @@
     .card-image
       %figure.image.is-4by3
         - if @booking.apartment.image.attached? && @booking.apartment.image.variable?
-          = image_tag @booking.apartment.image.variant(:medium)
+          = link_to image_tag(@booking.apartment.image.variant(:medium)), apartment_path(apartment: @booking.apartment, id: @booking.apartment.id)
         - else 
           = image_tag "missing.png"
 
       .card-content.m-5
-        .media
-          .media-left 
-            .image.is-48x48
-              - if @booking.apartment.owner.avatar.persisted?
-                = image_tag @booking.apartment.owner.avatar, class: "is-rounded"
-              - else
-                = image_tag "missing.png", class: "is-rounded"
-          .media-content
-            .title.is-6
-              %i.fa-solid.fa-house 
-              = @booking.apartment.title
-            .subtitle.is-6.has-text-grey
-              = t('website.role.owner') + @booking.apartment.owner.full_name_humanized
+        = render "shared/card_media", booking: @booking, apartment: @booking.apartment
 
-          .columns.is-gap-2
-            .col
-              %strong.mr-1= t('website.booking.in_rent_from') 
-              =@booking.start_date.to_date 
-            .col
-              %strong.mr-1=t('website.date.at')
-              =@booking.end_date.to_date
+        .columns.is-gap-2
+          .col
+            %strong.mr-1= t('website.booking.in_rent_from') 
+            =@booking.start_date.to_date 
+          .col
+            %strong.mr-1=t('website.date.at')
+            =@booking.end_date.to_date
 
       .content
         .m-4

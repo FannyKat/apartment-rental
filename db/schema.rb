@@ -69,13 +69,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_153748) do
 
   create_table "disputes", force: :cascade do |t|
     t.bigint "booking_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "tenant_id", null: false
     t.text "description", default: "", null: false
     t.string "status", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_id"], name: "index_disputes_on_booking_id"
-    t.index ["user_id"], name: "index_disputes_on_user_id"
+    t.index ["owner_id"], name: "index_disputes_on_owner_id"
+    t.index ["tenant_id"], name: "index_disputes_on_tenant_id"
   end
 
   create_table "ownership_requests", force: :cascade do |t|
@@ -110,6 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_153748) do
   add_foreign_key "bookings", "apartments"
   add_foreign_key "bookings", "users", column: "tenant_id"
   add_foreign_key "disputes", "bookings"
-  add_foreign_key "disputes", "users"
+  add_foreign_key "disputes", "users", column: "owner_id"
+  add_foreign_key "disputes", "users", column: "tenant_id"
   add_foreign_key "ownership_requests", "users", column: "tenant_id"
 end

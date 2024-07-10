@@ -6,7 +6,7 @@ en:
       text: Required
       mark: ""
     input:
-      required: Please fill in this field
+      required: Please fill out this field
     labels:
       defaults:
         amenities: Amenities
@@ -14,7 +14,9 @@ en:
         number_of_bedrooms: Number of bedrooms
         title: Title
         rent_amount: Rent amount
-        image: Apartment image
+        image: Main image of the apartment
+        images: Additional images of the apartment
+        dispute_image: Image associated with the litige
         first_name: First name
         last_name: Last name
         cin: ID card
@@ -36,4 +38,4 @@ en:
           choose: Choose a file
           no_choose: No file chosen
     error_notification:
-      default_message: "Please review the problems below:"
+      default_message: "Please check the issues below:"

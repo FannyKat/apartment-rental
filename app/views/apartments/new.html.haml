@@ -1,5 +1,5 @@
 .is-flex.is-justify-content-space-around.mt-6
-  .card
+  .card.carousel-card
     .card-header
       .title.is-5.m-4= t('website.title.add_apartment')
 
@@ -8,17 +8,21 @@
         = simple_form_for(@apartment) do |f|
           = render "devise/shared/error_messages", resource: @apartment
 
-          = f.input :title, autofocus: true, required: true, input_html: { class: 'input', placeholder: t('website.apartment.title') }
+          = f.input :title, autofocus: true, required: true, input_html: { class: 'input', placeholder: t('simple_form.labels.defaults.title') }
 
-          = f.input :rent_amount, required: true, input_html: { class: 'input', placeholder: t('website.apartment.rent_amount') }
+          = f.input :rent_amount, required: true, input_html: { class: 'input', placeholder: t('simple_form.labels.defaults.rent_amount') }
         
-          = f.input :location, input_html: { class: 'input', placeholder: t('website.apartment.location') }
+          = f.input :location, input_html: { class: 'input', placeholder: t('simple_form.labels.defaults.location') }
         
-          = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: t('website.apartment.number_of_bedrooms') }
+          = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: t('simple_form.labels.defaults.number_of_bedrooms') }
         
-          = f.input :amenities, input_html: { class: 'input', placeholder: t('website.apartment.amenities') }
+          = f.input :amenities, input_html: { class: 'input', placeholder: t('simple_form.labels.defaults.amenities') }
 
-          = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
+          .columns.m-5
+            .column
+              = f.input :image, as: :file, input_html: { class: 'input' }
+            .column
+              = f.input :images, as: :file, input_html: { multiple: true, direct_upload: true, class: 'input' }
 
           .card-footer
             .card-footer-item

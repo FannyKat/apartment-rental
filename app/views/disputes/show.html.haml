@@ -2,8 +2,8 @@
   .card
     .card-image
       %figure.image.is-4by3
-        - if @dispute.image.attached?
-          = image_tag @dispute.image
+        - if @dispute.dispute_image.attached?
+          = image_tag @dispute.dispute_image
         - else 
           = image_tag "missing.png"
           

@@ -23,8 +23,8 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
-  def public?
-    !user.present?
+  def is_admin_or_owner?
+    user.admin? || user.owner?
   end
 
   class Scope < Scope

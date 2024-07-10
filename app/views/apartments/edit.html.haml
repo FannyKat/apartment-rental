@@ -21,11 +21,12 @@
         
           = f.input :number_of_bedrooms, input_html: { class: 'input', placeholder: t('website.apartment.number_of_bedrooms') }
           
-          .columns
+          = f.input :amenities, input_html: { class: 'input', placeholder: t('website.apartment.amenities') }
+          .columns.m-4
             .column
-              = f.input :amenities, input_html: { class: 'input', placeholder: t('website.apartment.amenities') }
+              = f.input :image, as: :file, input_html: { class: 'input' }
             .column
-              = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
+              = f.input :images, as: :file, input_html: { multiple: true, direct_upload: true, class: 'input' }
 
           .card-footer
             .card-footer-item 

@@ -43,13 +43,18 @@ fr:
       number_of_bedrooms: "Nombre de chambres : "
       title: Titre
       rent_amount: "Prix du loyer : "
-      image: Image de l'appartement
+      image: Image principale de l'appartement
+      images: Images supplémentaires de l'appartement
       rooms: " Chambres"
     booking:
       in_rent_from: "Loué du "
       in_rent_at: "Loué au "
       tenant_message: "Message du locataire : "
       status: "Statut : "
+      accepted: La réservation a bien été confirmé.
+      rejected: La réservation a été rejeté.
+      canceled: La réservation a été annulé.
+      pending: La réservation a été mise en attente.
     button:
       back: Retour
       become_owner: Vous voulez devenir Hôte ?
@@ -72,6 +77,8 @@ fr:
     dispute:
       description: Description du litige
       status: "Statut du litige : "
+      sended: Votre litige a bien été envoyé à l'administrateur
+      not_send: Une erreur est survenue votre litige n'a pas été envoyé
     listing:
       no_disputes: Pas de litiges en cours.
       no_results: Aucun résultats de recherche.
@@ -85,6 +92,7 @@ fr:
       bookings: Réservations
       account: Mon Compte
       logout: Se déconnecter
+      disputes: Litiges
     ownership_request:
       status: "Statut de votre demande : "
     status:

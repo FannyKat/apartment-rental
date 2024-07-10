@@ -12,7 +12,10 @@
 #
 class Dispute < ApplicationRecord
   belongs_to :booking
-  belongs_to :user
 
-  has_one_attached :image
+  belongs_to :owner, class_name: 'User'
+  belongs_to :tenant, class_name: 'User'
+
+
+  has_one_attached :dispute_image
 end

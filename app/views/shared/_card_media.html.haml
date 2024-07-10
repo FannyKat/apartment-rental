@@ -1,7 +1,11 @@
 .media
   .media-left
     .image.is-48x48
-      - if current_user.owner? and booking.tenant.avatar.persisted?
+      - if !booking and current_user.owner?
+        = image_tag apartment.owner.avatar, class: "is-rounded" unless !apartment.owner.avatar
+        = image_tag "missing.png", class: "is-rounded" unless apartment.owner.avatar
+    
+      - elsif current_user.owner? and booking.tenant.avatar.persisted?
         = image_tag booking.tenant.avatar, class: "is-rounded"
 
       - elsif current_user.tenant? and apartment.owner.avatar.persisted?
@@ -15,7 +19,7 @@
       %i.fa-solid.fa-house 
       = apartment.title
     .subtitle.is-6.has-text-grey
-      - if current_user.owner? 
+      - if current_user.owner? and booking
         = t('website.role.tenant') + booking.tenant.full_name_humanized
 
         .subtitle.is-6.has-text-grey

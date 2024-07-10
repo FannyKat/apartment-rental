@@ -4,8 +4,7 @@
       .title.is-5.m-4= t('website.title.dispute_declaration')
 
     .card-content.m-5
-      %strong= t('website.role.tenant') + @booking.tenant.full_name_humanized
-      .subtitle.is-6.has-text-grey-light= t('website.booking.in_rent_at') + @booking.apartment.title
+      = render 'shared/card_media', booking: @booking, apartment: @booking.apartment
       .columns
         .col.m-5.is-6.has-text-grey-light= t('website.date.from') + @booking.start_date.to_date.to_s
         .col.m-5.is-6.has-text-grey-light= t('website.date.at') + @booking.end_date.to_date.to_s
@@ -18,7 +17,7 @@
 
           = f.input :description, autofocus: true, required: true, input_html: { class: 'input', placeholder: t('website.apartment.title') }
 
-          = f.input :image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
+          = f.input :dispute_image, as: :file, input_html: { class: 'input', placeholder: 'Image' }
           
           .card-footer.mt-5
             .card-footer-item

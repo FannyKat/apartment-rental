@@ -8,3 +8,7 @@ default: &default
 development:
   <<: *default
   database: apartment_rental
+
+test:
+  <<: *default
+  database: apartment_rental_test

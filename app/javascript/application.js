@@ -7,5 +7,7 @@ Turbo.start()
 import "@fortawesome/fontawesome-free";
 
 import "controllers"
+
 import "./controllers/image-modal-controller.js"
 import "./controllers/navbar-burger-controller.js"
+import "./controllers/carousel-controller.js"

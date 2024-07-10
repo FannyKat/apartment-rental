@@ -1,5 +1,6 @@
 class ApartmentsController < ApplicationController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
+
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
 
   after_action :verify_authorized
@@ -85,6 +86,9 @@ class ApartmentsController < ApplicationController
   end
 
   def apartment_params
-    params.require(:apartment).permit(:rent_amount, :number_of_bedrooms, :location, :amenities, :image, :title)
+    params.require(:apartment).permit(
+      :rent_amount, :number_of_bedrooms, :location,
+      :amenities, :image, :title, images: []
+    )
   end
 end

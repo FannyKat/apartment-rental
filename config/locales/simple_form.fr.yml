@@ -14,7 +14,9 @@ fr:
         number_of_bedrooms: Nombre de chambres
         title: Titre
         rent_amount: Prix du loyer
-        image: Image de l'appartement
+        image: Image principale de l'appartement
+        images: Images supplémentaires de l'appartement
+        dispute_image: Image associé au litige
         first_name: Prénom
         last_name: Nom
         cin: Carte d'identité

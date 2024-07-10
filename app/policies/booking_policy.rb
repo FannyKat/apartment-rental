@@ -1,7 +1,7 @@
 class BookingPolicy < ApplicationPolicy
 
   def create?
-    !user.present? or user.tenant?
+    user.tenant?
   end
 
   def booking?
@@ -13,7 +13,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def show?
-    user.owner? || user.tenant? || user.admin?
+    user.owner? || user.admin? || user.tenant?
   end
 
   def destroy?
@@ -31,6 +31,10 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def pending?
+    user.owner?
+  end
+
+  def canceled?
     user.owner?
   end
 

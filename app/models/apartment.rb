@@ -23,10 +23,16 @@ class Apartment < ApplicationRecord
     attachable.variant :medium, resize_to_limit: [300, 300]
   end
 
+  has_many_attached :images
+
   # Validations
   validates :title, :location, :rent_amount, :number_of_bedrooms, :amenities, presence: true
 
   def formated_amount
     (self.rent_amount ? self.rent_amount.to_s + ' €' : "prix non renseigné")
+  end
+
+  def resized_image(image, size: [300, 300])
+    image.variable? ? image.variant(resize_to_limit: size).processed : image
   end
 end

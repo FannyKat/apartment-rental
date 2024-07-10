@@ -5,12 +5,12 @@
         .card-image
           %figure.image.is-4by3
             - if booking.apartment.image.attached?
-              = image_tag booking.apartment.image.variant(:medium)
+              = link_to (image_tag booking.apartment.image.variant(:medium)), apartment_path(apartment: booking.apartment, id: booking.apartment.id)
             - else
               = image_tag "missing.png"
               
         .card-content
-          = render "layouts/card_media", booking: booking, apartment: booking.apartment
+          = render "shared/card_media", booking: booking, apartment: booking.apartment
 
           .content
             .m-4
@@ -41,20 +41,7 @@
                 %strong= t('website.booking.status')
                 = booking.status
 
-        .card-footer
-          - if policy(:user).owner?
-            - if booking.accepted?
-              .card-footer-item
-                = link_to t('website.button.to_view'), booking_path(booking), class: "button is-warning"
-            .card-footer-item
-              = button_to t('website.button.to_accept'), accepted_booking_path(booking), method: :patch, class: "button is-success", disabled: !booking.may_accepted?
-            .card-footer-item
-              = button_to t('website.button.to_reject'), rejected_booking_path(booking), method: :patch, class: "button is-danger", disabled: !booking.may_rejected?
-            .card-footer-item
-              = button_to t('website.button.to_put_on_hold'), pending_booking_path(booking), method: :patch, class: "button has-background-link-light", disabled: !booking.may_pending?
-          - else
-            - if policy(booking).destroy?
-              .card-footer-item
-                = button_to t('website.button.to_cancel'), booking_path(booking.id), method: :delete, class: "button is-light"
+        = render 'bookings/card_actions', booking: booking 
+
   - else
     %p= t('website.listing.no_bookings')

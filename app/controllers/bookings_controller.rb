@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :set_booking, only: [:show, :edit, :update, :destroy, :rejected, :accepted, :pending]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :rejected, :accepted, :pending, :canceled]
 
   before_action :set_apartment, only: [:create, :new]
 
@@ -19,6 +19,7 @@ class BookingsController < ApplicationController
 
   def show
     @booking
+
     authorize @booking
   end
 
@@ -73,6 +74,8 @@ class BookingsController < ApplicationController
     flash[:danger] = 'Booking was successfully destroyed !'
   end
 
+  # Methods to owner's manage booking
+
   def accepted
     if booking_exists_for_same_date?
       authorize @booking
@@ -88,7 +91,7 @@ class BookingsController < ApplicationController
     authorize @booking
 
     redirect_to bookings_url
-    flash[:success] = 'Booking accepted.'
+    flash[:success] = t('website.booking.accepted')
   end
 
   def rejected
@@ -98,7 +101,7 @@ class BookingsController < ApplicationController
 
     redirect_to bookings_url
 
-    flash[:danger] = 'Booking rejected.'
+    flash[:danger] = t('website.booking.rejected')
   end
 
   def pending
@@ -108,13 +111,23 @@ class BookingsController < ApplicationController
 
     redirect_to bookings_url
 
-    flash[:warning] = 'Booking pending...'
+    flash[:warning] = t('website.booking.pending')
+  end
+
+  def canceled
+    @booking.canceled!
+
+    authorize @booking
+
+    redirect_to bookings_url
+
+    flash[:warning] = t('website.booking.canceled')
   end
 
   private
 
   def booking_exists_for_same_date?
-    existing_booking = Booking.where(apartment_id: @booking.apartment_id)
+    existing_booking = Booking.where(status: "accepted", apartment_id: @booking.apartment_id)
                               .where("start_date <= ? AND end_date >= ?", @booking.end_date, @booking.start_date)
                               .where.not(id: @booking.id)
 

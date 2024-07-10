@@ -35,13 +35,18 @@ en:
       number_of_bedrooms: "Number of bedrooms : "
       title: Title
       rent_amount: "Rent amount : "
-      image: Apartment image
+      image: Main image of the apartment
+      images: Additional images of the apartment
       rooms: " Rooms"
     booking:
       in_rent_from: "Rented from "
       in_rent_at: "Rented at "
       tenant_message: "Tenant message : "
       status: "Status : "
+      accepted: The reservation has been confirmed.
+      rejected: The reservation has been rejected.
+      canceled: The reservation has been canceled.
+      pending: The reservation is pending.
     button:
       back: Back
       become_owner: Want to become a Host?
@@ -64,6 +69,8 @@ en:
     dispute:
       description: Dispute description
       status: "Dispute status : "
+      sended: Your dispute has been successfully sent to the administrator.
+      not_send: An error occurred, and your dispute could not be sent.
     listing:
       no_disputes: No ongoing disputes.
       no_results: No search results.
@@ -77,6 +84,7 @@ en:
       bookings: Bookings
       account: My Account
       logout: Logout
+      disputes: Disputes
     ownership_request:
       status: "Status of your request : "
     status:

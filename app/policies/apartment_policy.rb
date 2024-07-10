@@ -4,7 +4,7 @@ class ApartmentPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present? and (user.tenant? || user.owner? || user.admin?)
+    true
   end
 
   def create?
@@ -20,7 +20,7 @@ class ApartmentPolicy < ApplicationPolicy
   end
 
   def search?
-    user.present? and (user.tenant? || user.admin?)
+    user.tenant? || user.admin?
   end
 
   class Scope < Scope

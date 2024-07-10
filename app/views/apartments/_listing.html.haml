@@ -4,9 +4,13 @@
       .card
         .card-image
           %figure.image.is-4by3
-            - if apartment.image.attached? && apartment.image.variable?
-              = link_to image_tag(apartment.image.variant(:medium)), new_booking_path(apartment_id: apartment.id) if policy(:booking).new?
-              = link_to image_tag(apartment.image.variant(:medium)), apartment_path(apartment: apartment, id: apartment.id) if policy(:apartment).show?
+            - if apartment.image.attached?
+              = link_to image_tag(apartment.image.variant(:medium)), new_booking_path(apartment_id: apartment.id) if policy(:user).tenant?
+              = link_to image_tag(apartment.image.variant(:medium)), apartment_path(apartment: apartment, id: apartment.id) if policy(:user).is_admin_or_owner?
+            - else
+              = link_to image_tag("missing.png"), new_booking_path(apartment_id: apartment.id) if policy(:user).tenant?
+              = link_to image_tag("missing.png"), apartment_path(apartment: apartment, id: apartment.id) if policy(:user).is_admin_or_owner?
+        
         .card-content
           .media
             .media-left

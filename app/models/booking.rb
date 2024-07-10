@@ -29,6 +29,7 @@ class Booking < ApplicationRecord
     state :pending, initial: true
     state :accepted
     state :rejected
+    state :canceled
 
     event :accepted do
       transitions from: :pending, to: :accepted
@@ -40,6 +41,10 @@ class Booking < ApplicationRecord
 
     event :pending do
       transitions from: [:rejected], to: :pending
+    end
+
+    event :canceled do
+      transitions from: [:accepted], to: :pending
     end
   end
 end

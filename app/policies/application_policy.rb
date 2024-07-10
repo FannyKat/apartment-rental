@@ -9,11 +9,11 @@ class ApplicationPolicy
   end
 
   def tenant?
-    user.present? && user.tenant?
+    user.tenant?
   end
 
   def owner?
-    user.present? && user.owner?
+    user.owner?
   end
 
   def index?

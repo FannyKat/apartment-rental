@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       patch :accepted
       patch :rejected
       patch :pending
+      patch :canceled
     end
   end
 
