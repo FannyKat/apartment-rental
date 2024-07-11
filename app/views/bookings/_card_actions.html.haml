@@ -1,0 +1,24 @@
+.card-footer
+  - if booking.accepted?
+    .card-footer-item
+      = link_to t('website.button.to_view'), booking_path(booking), class: "button is-warning"
+    -if policy(:user).owner?
+      .card-footer-item
+        = button_to t('website.button.to_cancel'), canceled_booking_path(booking), method: :patch, class: "button is-light" if booking.may_canceled?
+  
+  - if policy(:user).owner? and booking.status != "accepted"
+    .card-footer-item
+      = button_to t('website.button.to_accept'), accepted_booking_path(booking), method: :patch, class: "button is-success", disabled: !booking.may_accepted?
+    
+    .card-footer-item
+      = button_to t('website.button.to_reject'), rejected_booking_path(booking), method: :patch, class: "button is-danger", disabled: !booking.may_rejected?
+    
+    .card-footer-item
+      = button_to t('website.button.to_put_on_hold'), pending_booking_path(booking), method: :patch, class: "button has-background-link-light", disabled: !booking.may_pending?
+  
+  - elsif booking.status != "accepted"
+    
+    - if policy(booking).destroy?
+      
+      .card-footer-item
+        = button_to t('website.button.to_destroy'), booking_path(booking.id), method: :delete, class: "button is-danger", form: { data: { turbo_confirm: t('website.message.data_confirm') } }

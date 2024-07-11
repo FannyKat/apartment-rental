@@ -14,7 +14,7 @@ RailsAdmin.config do |config|
 
   config.authorize_with do
     unless RailsAdminPolicy.new(current_user, nil).dashboard?
-      flash[:alert] = "You are not authorized to access this page."
+      flash[:alert] = t('unauthorized.access')
       redirect_to main_app.root_path
     end
   end

@@ -4,7 +4,8 @@
 #
 #  id          :bigint           not null, primary key
 #  booking_id  :bigint           not null
-#  user_id     :bigint           not null
+#  owner_id    :bigint           not null
+#  tenant_id   :bigint           not null
 #  description :text             default(""), not null
 #  status      :string           default(""), not null
 #  created_at  :datetime         not null
@@ -18,4 +19,7 @@ class Dispute < ApplicationRecord
 
 
   has_one_attached :dispute_image
+
+  # Validations
+  validates :description, presence: true
 end

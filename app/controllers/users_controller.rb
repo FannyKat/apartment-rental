@@ -5,15 +5,15 @@ class UsersController < ApplicationController
     if current_user.owner?
       current_user.update(role: "tenant")
 
-      redirect_to root_path
+      flash[:notice] = t('website.role.switch_to_tenant')
 
-      flash[:notice] = "Switched to Tenant role. You can now view all apartments."
+      redirect_to root_path
     else
       current_user.update(role: "owner")
 
-      redirect_to root_path
+      flash[:notice] = t('website.role.switch_to_owner')
 
-      flash[:notice] = "Switched to Owner role. You can now view your apartments."
+      redirect_to root_path
     end
   end
 end

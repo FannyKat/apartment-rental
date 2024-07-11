@@ -2,51 +2,80 @@ en:
   activerecord:
     attributes:
       user:
+        amenities: Amenities
+        location: Location
+        number_of_bedrooms: Number of bedrooms
+        title: Title
+        description: Description
+        rent_amount: Rent amount
         become_owner: Become Host
         become_tenant: Become Tenant
-        confirmation_sent_at: Confirmation Sent At
-        confirmation_token: Password Confirmation Token
-        confirmed_at: Confirmed At
-        created_at: Created At
-        current_password: Current Password
-        current_sign_in_at: Current Sign In At
-        current_sign_in_ip: Current Sign In IP
+        confirmation_sent_at: Confirmation sent at
+        confirmation_token: Confirmation token
+        confirmed_at: Confirmed at
+        created_at: Created at
+        current_password: Current password
+        current_sign_in_at: Current sign-in at
+        current_sign_in_ip: Current sign-in IP
         email: Email
-        encrypted_password: Encrypted Password
-        failed_attempts: Failed Attempts
-        last_sign_in_at: Last Sign In At
-        last_sign_in_ip: Last Sign In IP
-        locked_at: Locked At
+        encrypted_password: Encrypted password
+        first_name: First name
+        last_name: Last name
+        failed_attempts: Failed attempts
+        last_sign_in_at: Last sign-in at
+        last_sign_in_ip: Last sign-in IP
+        locked_at: Locked at
         password: Password
-        password_confirmation: Password Confirmation
-        remember_created_at: Remember Created At
+        password_confirmation: Password confirmation
+        remember_created_at: Remember created at
         remember_me: Remember me?
-        reset_password_sent_at: Reset Password Sent At
-        reset_password_token: Reset Password Token
+        reset_password_sent_at: Reset password sent at
+        reset_password_token: Reset password token
         role: Role
-        sign_in_count: Sign In Count
-        unconfirmed_email: Unconfirmed Email
-        unlock_token: Unlock Token
-        updated_at: Updated At
+        sign_in_count: Sign-in count
+        unconfirmed_email: Unconfirmed email
+        unlock_token: Unlock token
+        updated_at: Updated at
+
+      ownership_request:
+        cin: ID card
+        first_name: First name
+        last_name: Last name
+
+      booking:
+        start_date: Start date
+        end_date: End date
+
+      apartment:
+        title: Title
+        location: Location
+        number_of_bedrooms: Number of bedrooms
+        amenities: Amenities
+        rent_amount: Rent amount
+
   website:
     apartment:
-      amenities: "Amenities : "
-      location: "Location : "
-      number_of_bedrooms: "Number of bedrooms : "
+      amenities: "Amenities: "
+      location: "Location: "
+      number_of_bedrooms: "Number of bedrooms: "
       title: Title
-      rent_amount: "Rent amount : "
-      image: Main image of the apartment
-      images: Additional images of the apartment
+      rent_amount: "Rent amount: "
+      image: Main apartment image
+      images: Additional apartment images
       rooms: " Rooms"
+
     booking:
+      error:
+        same_date: Unable to accept booking. Another booking exists for the same date.
       in_rent_from: "Rented from "
-      in_rent_at: "Rented at "
-      tenant_message: "Tenant message : "
-      status: "Status : "
-      accepted: The reservation has been confirmed.
-      rejected: The reservation has been rejected.
-      canceled: The reservation has been canceled.
-      pending: The reservation is pending.
+      in_rent_at: "Rented until "
+      tenant_message: "Tenant message: "
+      status: "Status: "
+      accepted: Booking has been confirmed.
+      rejected: Booking has been rejected.
+      canceled: Booking has been canceled.
+      pending: Booking is pending.
+
     button:
       back: Back
       become_owner: Want to become a Host?
@@ -55,7 +84,7 @@ en:
       tenant_mode: Tenant Mode
       to_accept: Accept
       to_confirm: Confirm
-      to_destroy: Destroy
+      to_destroy: Delete
       to_edit: Edit
       to_cancel: Cancel
       to_put_on_hold: Put on hold
@@ -63,49 +92,74 @@ en:
       to_reject: Reject
       to_view: View
       view_disputes: View disputes
+
     date:
       from: "From "
       at: "at "
+
     dispute:
       description: Dispute description
-      status: "Dispute status : "
-      sended: Your dispute has been successfully sent to the administrator.
-      not_send: An error occurred, and your dispute could not be sent.
+      status: "Dispute status: "
+
     listing:
       no_disputes: No ongoing disputes.
       no_results: No search results.
       no_bookings: You have no booking requests at the moment.
+
     models:
       apartment: Apartment
       booking: Booking
       user: User
+
     navbar:
       apartments: Apartments
       bookings: Bookings
       account: My Account
       logout: Logout
       disputes: Disputes
+
     ownership_request:
-      status: "Status of your request : "
+      status: "Status of your request: "
+
     status:
       accepted: Accepted
       pending: Pending
       rejected: Rejected
+
     role:
+      switch_to_owner: Switched to Host role. You can now view your bookings.
+      switch_to_tenant: Switched to Tenant role. You can now view all apartments.
       admin: Administrator
-      owner: "Host : "
-      tenant: "Tenant : "
+      owner: "Host: "
+      tenant: "Tenant: "
+
     title:
       add_apartment: Describe your apartment
       bookings_demands: Your booking requests
-      edit_apartment: "Edit the apartment "
-      dispute: "Dispute for the apartment "
+      edit_apartment: "Edit apartment "
+      dispute: "Dispute for apartment "
       dispute_declaration: Declare your dispute
-      owner_request: Your request to become an owner
+      owner_request: Your request to become a host
       rents_for: "Bookings for "
       to_reserve: "Reserve "
+
     search:
       location: Location
       min_price: Minimum price
       max_price: Maximum price
       number_of_bedrooms: Number of bedrooms
+
+    message:
+      data_confirm: Are you sure you want to delete?
+      success: Your request has been successfully submitted.
+      updated: Your request has been successfully updated.
+
+      booking:
+        destroyed: Booking has been successfully deleted.
+
+      apartment:
+        destroyed: Apartment has been successfully deleted.
+
+  unauthorized:
+    message: "You are not authorized to perform this action."
+    access: "You do not have permission to access this page."

@@ -17,7 +17,7 @@ class OwnershipRequest < ApplicationRecord
   has_one_attached :cin
 
   # Validations
-  validates :email, :first_name, :last_name, presence: true
+  validates :email, :first_name, :last_name, :cin, presence: true
 
   after_update :grant_ownership, if: :accepted?
 

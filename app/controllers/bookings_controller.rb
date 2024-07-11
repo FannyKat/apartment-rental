@@ -7,9 +7,12 @@ class BookingsController < ApplicationController
 
   after_action :verify_authorized
 
+  # List bookings through tenant or owner
+
   def index
     if current_user.tenant?
       @bookings = current_user.bookings.all
+
     elsif current_user.owner?
       @bookings = Booking.joins(:apartment).where(apartments: { owner_id: current_user.id })
     end
@@ -44,34 +47,42 @@ class BookingsController < ApplicationController
     authorize @booking
 
     if @booking.save
+      flash[:success] = t('website.message.success')
+
       redirect_to bookings_path
-      flash[:success] = 'Booking was succesfully created !'
     else
+      flash[:danger] = @booking.errors.full_messages.to_sentence
+
       redirect_to new_booking_path
-      flash[:danger] = 'An error occured. Booking was not created.'
     end
   end
 
   def update
     if @booking.update(booking_params)
-      flash[:success] = 'Booking was successfully updated !'
+      flash[:success] = t('website.message.updated')
+
       redirect_to @booking
     else
+      flash[:danger] = @booking.errors.full_messages.to_sentence
+
       rendirect_to edit_booking_path
-      flash[:danger] = 'An error occured. Booking was not updated.'
     end
 
     authorize @booking
   end
 
   def destroy
-    @booking.destroy
-
     authorize @booking
 
-    redirect_to bookings_url
+    if @booking.destroy
+      flash[:danger] = t('website.message.booking.destroyed')
 
-    flash[:danger] = 'Booking was successfully destroyed !'
+      redirect_to bookings_url
+    else
+      flash[:danger] = @apartments.errors.full_messages.to_sentence
+
+      redirect_to @apartment
+    end
   end
 
   # Methods to owner's manage booking
@@ -80,8 +91,9 @@ class BookingsController < ApplicationController
     if booking_exists_for_same_date?
       authorize @booking
 
+      flash[:error] = t('website.booking.error.same_date')
+
       redirect_to bookings_path
-      flash[:error] = "Cannot accept booking. Another booking exists for same date."
 
       return
     end
@@ -90,8 +102,9 @@ class BookingsController < ApplicationController
 
     authorize @booking
 
-    redirect_to bookings_url
     flash[:success] = t('website.booking.accepted')
+
+    redirect_to bookings_url
   end
 
   def rejected
@@ -99,9 +112,9 @@ class BookingsController < ApplicationController
 
     authorize @booking
 
-    redirect_to bookings_url
-
     flash[:danger] = t('website.booking.rejected')
+
+    redirect_to bookings_url
   end
 
   def pending
@@ -109,9 +122,9 @@ class BookingsController < ApplicationController
 
     authorize @booking
 
-    redirect_to bookings_url
-
     flash[:warning] = t('website.booking.pending')
+
+    redirect_to bookings_url
   end
 
   def canceled
@@ -119,9 +132,9 @@ class BookingsController < ApplicationController
 
     authorize @booking
 
-    redirect_to bookings_url
-
     flash[:warning] = t('website.booking.canceled')
+
+    redirect_to bookings_url
   end
 
   private

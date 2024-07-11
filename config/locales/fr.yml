@@ -36,6 +36,20 @@ fr:
         unconfirmed_email: Email non confirmé
         unlock_token: Clé de déverrouillage
         updated_at: Date de mise à jour
+
+      ownership_request:
+        cin: "Carte d'identité"
+        first_name: "Prénom"
+        last_name: "Nom"
+      booking:
+        start_date: La date de début
+        end_date: La date de fin
+      apartment:
+        title: Titre
+        location: Localisation
+        number_of_bedrooms: Nombre de chambres
+        amenities: Commodités
+        rent_amount: Prix du loyer
   website:
     apartment:
       amenities: "Commodités : "
@@ -47,6 +61,8 @@ fr:
       images: Images supplémentaires de l'appartement
       rooms: " Chambres"
     booking:
+      error:
+        same_date: Impossible d'accepter la réservation. Une autre réservation existe pour la même date.
       in_rent_from: "Loué du "
       in_rent_at: "Loué au "
       tenant_message: "Message du locataire : "
@@ -77,8 +93,6 @@ fr:
     dispute:
       description: Description du litige
       status: "Statut du litige : "
-      sended: Votre litige a bien été envoyé à l'administrateur
-      not_send: Une erreur est survenue votre litige n'a pas été envoyé
     listing:
       no_disputes: Pas de litiges en cours.
       no_results: Aucun résultats de recherche.
@@ -100,6 +114,8 @@ fr:
       pending: En attente
       rejected: Rejetée
     role:
+      switch_to_owner: Passé au rôle de propriétaire. Vous pouvez maintenant voir vos réservations.
+      switch_to_tenant: Passé au rôle de locataire. Vous pouvez maintenant voir tous les appartements.
       admin: Administrateur
       owner: "Hôte : "
       tenant: "Locataire : "
@@ -117,3 +133,19 @@ fr:
       min_price: Prix minimum
       max_price: Prix maximum
       number_of_bedrooms: Nombre de chambres
+    message:
+      data_confirm: Etes-vous sur de vouloir supprimer?
+      success: Votre demande a été soumise avec succès.
+      updated: Votre demande a été modifié avec succès.
+      booking:
+        destroyed: La réservation a été supprimé avec succès.
+      apartment:
+        destroyed: Le logement a été supprimé avec succès.
+
+  unauthorized:
+    message: "Vous n'êtes pas autorisé à effectuer cette action."
+    access: "Vous n'avez pas l'autorisation d'accéder à cette page."
+  admin:
+    actions:
+      index:
+        no_records: Aucun enregistrement trouvé.

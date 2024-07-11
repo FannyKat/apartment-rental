@@ -1,6 +1,8 @@
 class DisputesController < ApplicationController
   before_action :authenticate_user!
 
+  # List disputes create by tenant or owner
+
   def index
     booking_id = params[:booking_id]
 
@@ -11,6 +13,8 @@ class DisputesController < ApplicationController
       @disputes = Dispute.where(owner_id: current_user.id) if current_user.owner?
     end
   end
+
+  # Show dispute of a booking
 
   def show
     @dispute = Dispute.find(params[:id])
@@ -37,12 +41,14 @@ class DisputesController < ApplicationController
 
     authorize @dispute
 
-    if @dispute.save!
+    if @dispute.save
+      flash[:notice] = t('website.message.success')
+
       redirect_to dispute_path(@dispute)
-      flash[:notice] = t('website.dispute.sended')
     else
+      flash[:danger] = @dispute.errors.full_messages.to_sentence
+
       redirect_to new_dispute_path
-      flash[:danger] = t('website.dispute.not_send')
     end
   end
 

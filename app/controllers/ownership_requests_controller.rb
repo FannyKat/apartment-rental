@@ -10,11 +10,13 @@ class OwnershipRequestsController < ApplicationController
     @ownership_request = OwnershipRequest.new(ownership_request_params)
 
     if @ownership_request.save
+      flash[:notice] = t('website.message.success')
+
       redirect_to edit_user_registration_path
-      flash[:notice] = 'Your request has been submitted.'
     else
+      flash[:danger] = @ownership_request.errors.full_messages.to_sentence
+
       redirect_to new_ownership_request_path
-      flash[:danger] = 'Unable to submit request.'
     end
   end
 

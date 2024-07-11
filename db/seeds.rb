@@ -11,13 +11,27 @@ users = [{
   role: 'admin'
 }]
 
-10.times do
+# Seed owners users
+
+5.times do
   users << {
     email: Faker::Internet.unique.email,
     password: 'password',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    role: ['owner', 'tenant'].sample,
+    role: 'owner',
+  }
+end
+
+# Seed tenants users
+
+5.times do
+  users << {
+    email: Faker::Internet.unique.email,
+    password: 'password',
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    role: 'tenant',
   }
 end
 
@@ -26,11 +40,7 @@ users.each do |user_attrs|
 
   avatar_url = Faker::Avatar.image(size: "100x100", format: "png", set: "set4")
 
-  puts "Attempting to download faker avatar..."
-
   downloaded_image = URI.open(avatar_url)
-
-  puts "Downloaded image successfully."
 
   user.avatar.attach(io: downloaded_image, filename: Faker::File.file_name, content_type: 'image/png')
 
@@ -63,13 +73,9 @@ apartments.each do |apt_attrs|
 
   begin
 
-    puts "Attempting to download faker image..."
-
     image_url = Faker::LoremFlickr.image(size: "300x300", search_terms: ["hebergement"])
 
     downloaded_image = URI.open(image_url)
-
-    puts "Downloaded image successfully."
 
     apartment.image.attach(io: downloaded_image, filename: Faker::File.file_name, content_type: 'image/jpg')
 
