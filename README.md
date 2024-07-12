@@ -6,16 +6,12 @@ This application allows users to browse apartments available for rent, create te
 
 ## Main Features
 
-- **Public Access**
-
-  - **View Apartments**: Users can browse available apartments without logging in.
-  - **Search Functionality**: Tenants can search for apartments based on location, price range, and number of bedrooms.
-
 - **Tenant Role**
 
   - **Account Creation**: Users can sign up as tenants.
   - **Booking Requests**: Tenants can request to book apartments based on their search criteria.
   - **Booking Management**: Tenants can view their booking requests and their statuses.
+  - **Search Functionality**: Tenants can search for apartments based on location, price range, and number of bedrooms.
 
 - **Owner Role**
 

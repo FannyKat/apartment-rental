@@ -4,4 +4,7 @@ class DisputePolicy < ApplicationPolicy
     user.owner? || user.tenant?
   end
 
+  def index?
+    user.owner? || user.tenant?
+  end
 end

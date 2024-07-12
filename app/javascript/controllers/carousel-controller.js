@@ -33,3 +33,7 @@ document.addEventListener('turbo:load', () => {
     updateCarousel();
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.dispatchEvent(new Event('turbo:load'));
+});

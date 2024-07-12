@@ -11,7 +11,7 @@
       %span{aria: {hidden: "true"}}
       %span{aria: {hidden: "true"}}
       
-  .navbar-menu
+  #navbarApartmentRental.navbar-menu
     .navbar-start
       - if current_user
         %a.navbar-item
@@ -50,7 +50,8 @@
           - elsif policy(:user).owner? || policy(:user).tenant?
             = link_to t('website.navbar.bookings'), bookings_path, class: 'navbar-item'
           
-          = link_to t('website.navbar.disputes'), disputes_path, class: 'navbar-item'
+          - if policy(:dispute).index?
+            = link_to t('website.navbar.disputes'), disputes_path, class: 'navbar-item'
 
           = link_to t('website.navbar.account'), edit_user_registration_path, class: 'navbar-item'
 

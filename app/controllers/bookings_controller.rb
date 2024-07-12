@@ -15,6 +15,8 @@ class BookingsController < ApplicationController
 
     elsif current_user.owner?
       @bookings = Booking.joins(:apartment).where(apartments: { owner_id: current_user.id })
+    elsif current_user.admin?
+      @bookings = Booking.all
     end
 
     authorize @bookings
