@@ -51,7 +51,7 @@ This application was built using Ruby on Rails and leverages the following gems:
 
 Entity-Relationship Diagram (ERD) representing the database structure of the Apartment Rental Application:
 
-![Schema ERD](https://github.com/FannyKat/apartment-rental/blob/main/public/erd.pdf)
+![ERD](https://github.com/user-attachments/assets/1cefdbad-4f77-4dd1-b93f-6584b04639af)
 
 ## Ruby and Rails Versions
 
